@@ -1,3 +1,5 @@
+*.pdf #temp
+figs/
 *.code-workspace
 *.aux
 *.bbl
