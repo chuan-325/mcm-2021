@@ -1,0 +1,4 @@
+*.code-workspace
+scijust/
+test-*/
+references/
