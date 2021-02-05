@@ -20,3 +20,4 @@
 *.fdb_latexmk
 *.synctex.gz
 __latexindent_temp.tex
+*.py
