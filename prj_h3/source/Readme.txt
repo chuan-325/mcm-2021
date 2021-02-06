@@ -7,4 +7,4 @@ Input Format:
 
 `python html_generator.py name_of_data.geojson SizeOfHex`
 
-sample: `python html_generator.py ../dataset/victoria-t.geojson 6`
+sample: `python html_generator.py ../dataset/victoria-t.geojson 7`
