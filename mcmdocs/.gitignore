@@ -1,4 +1,4 @@
-*.pdf #temp
+*.pdf
 figs/
 *.code-workspace
 *.aux
