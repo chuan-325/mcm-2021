@@ -14,10 +14,12 @@ def load_and_prepare_districts(filepath):
     swaps the latitude and longitude andstores geojson"""
     gdf_districts = gpd.read_file(filepath, driver="GeoJSON")
     gdf_districts.head()
-    gdf_districts["geom_geojson"] = gdf_districts["geometry"].apply(lambda x: geometry.mapping(x))
+    gdf_districts["geom_geojson"] = gdf_districts["geometry"].apply(
+        lambda x: geometry.mapping(x))
     gdf_districts["geom_swap"] = gdf_districts["geometry"].map(
         lambda polygon: ops.transform(lambda x, y: (y, x), polygon))
-    gdf_districts["geom_swap_geojson"] = gdf_districts["geom_swap"].apply(lambda x: geometry.mapping(x))
+    gdf_districts["geom_swap_geojson"] = gdf_districts["geom_swap"].apply(
+        lambda x: geometry.mapping(x))
     return gdf_districts
 
 
@@ -36,13 +38,10 @@ def fill_hexagons(geom_geojson, res, flag_swap=False, flag_return_df=False):
         df_fill_hex = pd.DataFrame({"hex_id": list_hexagons_filling})
         df_fill_hex["value"] = 0
         df_fill_hex['geometry'] = df_fill_hex.hex_id.apply(
-            lambda x:
-            {"type": "Polygon",
-             "coordinates": [
-                 h3.h3_to_geo_boundary(h=x,
-                                       geo_json=True)
-             ]
-             })
+            lambda x: {
+                "type": "Polygon",
+                "coordinates": [h3.h3_to_geo_boundary(h=x, geo_json=True)]
+            })
         assert (df_fill_hex.shape[0] == len(list_hexagons_filling))
         return df_fill_hex
     else:
@@ -57,8 +56,7 @@ def base_empty_map():
             attr='''© <a href="http://www.openstreetmap.org/copyright">
                       OpenStreetMap</a>contributors ©
                       <a href="http://cartodb.com/attributions#basemaps">
-                      CartoDB</a>'''
-            )
+                      CartoDB</a>''')
     return m
 
 
@@ -76,22 +74,22 @@ def plot_basemap_region_fill(df_boundaries_zones, initial_map=None):
         feat_collection_sel = FeatureCollection([feature_sel])
         geojson_subzone = json.dumps(feat_collection_sel)
 
-        GeoJson(
-            geojson_subzone,
-            style_function=lambda feature: {
-                'fillColor': None,
-                'color': 'blue',
-                'weight': 5,
-                'fillOpacity': 0
-            }
-        ).add_to(feature_group)
+        GeoJson(geojson_subzone,
+                style_function=lambda feature: {
+                    'fillColor': None,
+                    'color': 'blue',
+                    'weight': 5,
+                    'fillOpacity': 0
+                }).add_to(feature_group)
 
     feature_group.add_to(initial_map)
     return initial_map
 
 
-def hexagons_dataframe_to_geojson(df_hex, hex_id_field,
-                                  geometry_field, value_field,
+def hexagons_dataframe_to_geojson(df_hex,
+                                  hex_id_field,
+                                  geometry_field,
+                                  value_field,
                                   file_output=None):
     """Produce the GeoJSON representation containing all geometries in a dataframe
      based on a column in geojson format (geometry_field)"""
@@ -137,8 +135,7 @@ def map_addlayer_filling(df_fill_hex, map_initial, fillcolor=None):
     return map_initial
 
 
-def visualize_district_filled_compact(gdf_districts,
-                                      fillcolor=None):
+def visualize_district_filled_compact(gdf_districts, fillcolor=None):
     overall_map = base_empty_map()
     map_district = plot_basemap_region_fill(gdf_districts,
                                             initial_map=overall_map)
@@ -149,23 +146,23 @@ def visualize_district_filled_compact(gdf_districts,
         else:
             list_hexagons_filling_uncompact = []
         list_hexagons_filling_uncompact.extend(row["hex_fill_initial"])
-        list_hexagons_filling_uncompact = list(set(list_hexagons_filling_uncompact))
+        list_hexagons_filling_uncompact = list(
+            set(list_hexagons_filling_uncompact))
         # make dataframes
-        df_fill_compact = pd.DataFrame({"hex_id": list_hexagons_filling_uncompact})
+        df_fill_compact = pd.DataFrame(
+            {"hex_id": list_hexagons_filling_uncompact})
         df_fill_compact["value"] = 0
         df_fill_compact['geometry'] = df_fill_compact.hex_id.apply(
-            lambda x:
-            {"type": "Polygon",
-             "coordinates": [
-                 h3.h3_to_geo_boundary(h=x,
-                                       geo_json=True)
-             ]
-             })
+            lambda x: {
+                "type": "Polygon",
+                "coordinates": [h3.h3_to_geo_boundary(h=x, geo_json=True)]
+            })
         map_fill_compact = map_addlayer_filling(df_fill_hex=df_fill_compact,
                                                 map_initial=map_district,
                                                 fillcolor=fillcolor)
 
-    folium.map.LayerControl('bottomright', collapsed=True).add_to(map_fill_compact)
+    folium.map.LayerControl('bottomright',
+                            collapsed=True).add_to(map_fill_compact)
     return map_fill_compact
 
 
@@ -175,13 +172,17 @@ if __name__ == '__main__':
     output_path = 'test-' + sys.argv[2] + '.html'
     gdf_districts = load_and_prepare_districts(filepath=input_file_districts)
 
-    gdf_districts["hex_fill_initial"] = gdf_districts["geom_swap_geojson"].apply(
-        lambda x: list(fill_hexagons(geom_geojson=x,
-                                     res=size))
-    )
-    gdf_districts["num_hex_fill_initial"] = gdf_districts["hex_fill_initial"].apply(len)
+    gdf_districts["hex_fill_initial"] = gdf_districts[
+        "geom_swap_geojson"].apply(
+            lambda x: list(fill_hexagons(geom_geojson=x, res=size)))
+    gdf_districts["num_hex_fill_initial"] = gdf_districts[
+        "hex_fill_initial"].apply(len)
     total_num_hex_initial = gdf_districts["num_hex_fill_initial"].sum()
-    print("Until here, we'd have to search over {} hexagons".format(total_num_hex_initial))
-    gdf_districts["uncompacted_novoids"] = [[] for _ in range(gdf_districts.shape[0])]
+    print("Until here, we'd have to search over {} hexagons".format(
+        total_num_hex_initial))
+    gdf_districts["uncompacted_novoids"] = [
+        [] for _ in range(gdf_districts.shape[0])
+    ]
 
-    visualize_district_filled_compact(gdf_districts=gdf_districts).save(output_path)
+    visualize_district_filled_compact(
+        gdf_districts=gdf_districts).save(output_path)
