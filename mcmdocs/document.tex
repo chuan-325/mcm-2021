@@ -2,33 +2,40 @@
 %                          导言区                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[13pt]{ctexart} % 文档类
+% 基础样式
 \usepackage{geometry} % 设置页面
-\usepackage{graphicx} % 插图片
-\graphicspath{{C:/Users/zheng/Desktop/mcm-2021/mcmdocs/figs/}}
 \renewcommand{\figurename}{Figure} % 设置标题 重命名为英文
 \renewcommand{\tablename}{Table}
 \renewcommand{\contentsname}{Contents}
 \usepackage{changepage} % 设置摘要页缩减
 \usepackage{fontspec} % 便于修改字体
 \usepackage{fancyhdr} % 设置页眉页脚
-\usepackage{lastpage}
 \pagestyle{fancy} % 清空页眉页脚
-\usepackage[shortlabels]{enumitem} % 设置列表缩进
+\usepackage{lastpage}
 \usepackage{titlesec} % 设置修改默认的section标题大小
 \titleformat*{\section}{\LARGE}
 \titleformat*{\subsection}{\Large}
 \titleformat*{\subsubsection}{\Large}
+\usepackage[section]{placeins} % 新增: 浮动体不越过section
+% 浮动体样式
+\usepackage[shortlabels]{enumitem} % 设置列表缩进
+\usepackage{booktabs} % 三线表宏包
+\usepackage{array} % 设置表格的列格式
+\usepackage{graphicx} % 插图片
+\graphicspath{{C:/Users/zheng/Desktop/mcm-2021/mcmdocs/figs/}}
+% 数学样式
 \usepackage{amsmath} % 使用数学宏包
 \usepackage{amsfonts} % 使用数学字体
-\usepackage{array} % 设置表格的列格式
-\usepackage{booktabs} % 三线表宏包
+% bib样式
 \usepackage{etoolbox} % 设置参考文献不输出默认名
 \usepackage{newtxtext}
 \patchcmd{\thebibliography}{\section*{\refname}}{}{}{} % 引入网站作为参考文献
 \usepackage[]{hyperref} % 设置引用且末尾不显示文档名
+% 代码样式
 \usepackage{url} % 设置等宽的代码字体
-%\setmonofont{IBM Plex Mono}
-% 建议这个，但我系统没这个字体，且懒得折腾了 windows用户请
+%%\setmonofont{IBM Plex Mono}
+%% 建议这个，但我系统没这个字体，且懒得折腾了
+%%windows用户请
 \setmonofont{Courier New}
 % 颜色
 \usepackage{xcolor} % 代码高亮方案宏包
@@ -53,8 +60,8 @@
 	backgroundcolor=\color[RGB]{255,255,255},            % 设定背景颜色
 	keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
 	numberstyle=\footnotesize\color{darkgray},           % 设定行号格式
-	commentstyle=\itshape\color[RGB]{0,96,96},                % 设置代码注释的格式
-	stringstyle=\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+	commentstyle=\itshape\color[RGB]{0,96,96},           % 设置代码注释的格式
+	stringstyle=\slshape\color[RGB]{128,0,0},            % 设置字符串格式
 	showstringspaces=false,                              % 不显示字符串中的空格
 	language=python,                                     % 设置语言
 	morekeywords={alignas,continute,friend,register,true,alignof,decltype,goto,
@@ -209,7 +216,7 @@ Discrete hexagon planar grid systems naturally have 3 coordinate axes spaced $12
 \begin {figure}[h]
 \centering % 居中显示
 %\includegraphics[width=15cm,height=12cm]{ijkp.png}
-\includegraphics[scale=0.4]{ijkp.png}
+\includegraphics[scale=0.3]{ijkp.png}
 \caption{One possible map example that using the \textit{ijk} coordinate system} % 标题
 \end {figure}
 
@@ -222,58 +229,59 @@ Here are all the notations and their meanings in this paper.
     \vspace{3pt}
     \begin{tabular}{>{\centering\arraybackslash}p{6em}>{\centering\arraybackslash}p{30em}}
         \toprule % 绘制第1条线
-        Notation         & Meaning                                      \\
+        Notation         & Meaning                                 \\
         \midrule % 绘制第2条线
         $M
         (i,t)$           & Location of the $i$-th drone
-        \uppercase\expandafter{\romannumeral1} at time $t$              \\
+        \uppercase\expandafter{\romannumeral1} at time $t$         \\
         $R
         (j,t)$           & Location of the $j$-th drone
-        \uppercase\expandafter{\romannumeral2} at time $t$              \\
+        \uppercase\expandafter{\romannumeral2} at time $t$         \\
         $h
-        (x,y,z)$         & Elevation of the point $(x,y,z)$             \\
+        (x,y,z)$         & Elevation of the point $(x,y,z)$        \\
         $S
         (x,y,z)$         & Fire history of the point $(x,y,z)$
-        in the passed $5$ years                                         \\
+        in the passed $5$ years                                    \\
         $a_i
         (x,y,z)$         & Fire history of the point $(x,y,z)$
         in the $2020-i$-th year,
-        $i\in [1,5] \cap \mathbb{N} $                                   \\
+        $i\in [1,5] \cap \mathbb{N} $                              \\
         $F(x,y,z) $      & Vegetative and structural
-        condition of the point$(x,y,z)$                                 \\
-        $S(i,x,y,z,t)$   & Strength of the signal from the $i$-th drone
-        at point $(x,y,z)$ at time $t$                                  \\
+        condition of the point$(x,y,z)$                            \\
+        $S(i,x,y,z,t)$   & Strength of the signal from the
+        $i$-th drone at point $(x,y,z)$ at time $t$                \\
         $E
-        (x,y,z,N)$       & Supervisory density of the point $(x,y,z)$
-        when there are $N$ drones in the field                          \\
+        (x,y,z,N)$       & Supervisory density of
+        the point $(x,y,z)$ when there are $N$ drones in the field \\
         $Slope
-        (x,y,z)$         & Maximum slope of the point $(x,y,z)$         \\
+        (x,y,z)$         & Maximum slope of the point $(x,y,z)$    \\
         $\gamma$         & Factor used to calculate the weight
-        of slope in causing bushfire                                    \\
+        of slope in causing bushfire                               \\
         $\beta
-        (x,y,z)$         & Weight of slope in causing bushfire          \\
+        (x,y,z)$         & Weight of slope in causing bushfire     \\
         $\omega
-        (x,y,z)$         & Decreasing rate of signal at point $(x,y,z)$ \\
-        $\alpha$         & Elevational factor                           \\
+        (x,y,z)$         & Decreasing rate of signal
+        at point $(x,y,z)$                                         \\
+        $\alpha$         & Elevational factor                      \\
         $Chg
-        (q,x,y,z)$       & Location of the $q$-th charging station      \\
-        $V_{max}$        & Maximum flying velocity of a drone           \\
+        (q,x,y,z)$       & Location of the $q$-th charging station \\
+        $V_{\text{max}}$ & Maximum flying velocity of a drone      \\
         $N_{\text{SSA}}$ & Amount of drone
-        \uppercase\expandafter{\romannumeral1}                          \\
-        $N/rep$          & Amount of drones
-        \uppercase\expandafter{\romannumeral2}                          \\
-        $PF$             & Power consumption for a flying drone         \\
-        $PH$             & Power consumption for a hovering drone       \\
-        $t_{fl}
+        \uppercase\expandafter{\romannumeral1}                     \\
+        $N_{\text{rep}}$ & Amount of drones
+        \uppercase\expandafter{\romannumeral2}                     \\
+        $PF$             & Power consumption for a flying drone    \\
+        $PH$             & Power consumption for a hovering drone  \\
+        $t_{\text{fl}}
         (t,l)$           & Flight time of the $l$-th drone
-        until time $t$                                                  \\
-        $t_{hov}
+        until time $t$                                             \\
+        $t_{\text{hov}}
         (t,l)$           & Hovering time of the $l$-th drone
-        until time $t$                                                  \\
-        $T$              & Duration of a day (i.e. $1440 \min$)         \\
-        $t$              & Current time                                 \\
-        $Br$             & Total battery power of a drone               \\
-        $Ini$            & Location of the EOC                          \\
+        until time $t$                                             \\
+        $T$              & Duration of a day (i.e. $T=1440 \min$)  \\
+        $t$              & Current time                            \\
+        $Br$             & Total battery power of a drone          \\
+        $Ini$            & Location of the EOC                     \\
         \bottomrule
     \end{tabular}
 \end{table}
