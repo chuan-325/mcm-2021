@@ -106,7 +106,7 @@
 \vspace{-20pt}
 \noindent{\rule{\textwidth}{0.5mm}}
 % 大标题
-{\centering\fontsize{18}{16}\selectfont\textbf{{标题}}
+{\centering\fontsize{18}{16}\selectfont\textbf{{Fighting Wildfire with Unmanned Aerial Vehicle}}
 
     % summary
     \vspace{10pt}
@@ -136,11 +136,11 @@
 
 \noindent FROM: Team {} 2120710 , MCM\\
 \noindent To: The group of Governors\\
-\noindent Date: January 28, 2019
-% memo正文
+\noindent Date: February 8, 2020
+% request正文
 \vspace{10pt}
 \\
-这里是memo正文。
+这里是br正文。
 
 % 信多出一页，清理页眉页脚
 \thispagestyle{empty}
@@ -210,9 +210,23 @@ Here are all the notations and their meanings in this paper.
     \vspace{3pt}
     \begin{tabular}{>{\centering\arraybackslash}p{5em}>{\centering\arraybackslash}p{30em}}
         \toprule % 绘制第一条线
-        Symbol & Meaning                     \\ \midrule
-        $t$    & Time                        \\
-        $N$    & Total reported opioid cases \\
+        Symbol                & Meaning                                                \\ \midrule
+        $(x,y,z)$             & Coordinates                                            \\
+        $M(i,x,y,z,t)$        & Coordinates matrix of $i$ -th SSA at time $t$          \\
+        $P_{hexa}(x,y,z,t)$   & Coordinates matrix of front-line personnel at time $t$ \\
+        $P(j,w,g,t)$          & 前线人员的经纬度坐标                                   \\
+        $Posi(j,w,g)$         & 维多利亚省的经纬度坐标                                 \\
+        $h(x,y,z)$            & 地点高度                                               \\
+        $S(x,y,z)$            & 过去五年着火严重程度，约化火痕面积                     \\
+        $F(x,y,z)$            & 森林覆盖程度，用单位密度植物密度计                     \\
+        $Strength(i,x,y,z,t)$ & t时刻第i个中继器在（x，y）处的信号强度                 \\
+        $E(x,y,z,N)$          & 有N个无人机在一点的覆盖效度                            \\
+        $Slop(x,y,z)$         & 一点的最大坡度                                         \\
+        $\beta(x,y,z)$        & 梯度权重                                               \\
+        $\Gamma$              & 梯度因子                                               \\
+        $Nmp(j)$              & 第j个区域的人-机信号衰减率                             \\
+        $Nmm(i,k)$            & 第i个和第k个无人机之间的信号衰减频率                   \\
+
         \bottomrule
     \end{tabular}
 \end{table}

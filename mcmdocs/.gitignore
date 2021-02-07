@@ -1,4 +1,4 @@
-*.pdf
+//*.pdf
 *.code-workspace
 *.aux
 *.bbl
