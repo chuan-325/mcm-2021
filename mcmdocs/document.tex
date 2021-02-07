@@ -12,10 +12,10 @@
 \usepackage{fancyhdr} % 设置页眉页脚
 \pagestyle{fancy} % 清空页眉页脚
 \usepackage{lastpage}
-\usepackage{titlesec} % 设置修改默认的section标题大小
-\titleformat*{\section}{\LARGE}
-\titleformat*{\subsection}{\Large}
-\titleformat*{\subsubsection}{\Large}
+\usepackage{titlesec} % 设置修改默认的section标题样式
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\Large\bfseries}
 \usepackage[section]{placeins} % 新增: 浮动体不越过section
 % 浮动体样式
 \usepackage[shortlabels]{enumitem} % 设置列表缩进
@@ -172,9 +172,9 @@
 \fancyfoot[C]{\bfseries\thepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Introduction
-\textbf{\section{Introduction}}
+\section{Introduction}
 % .1
-\textbf{\subsection{Restatement of the Problem}}
+\subsection{Restatement of the Problem}
 Many people...Therefore we are facing the following problems:
 \begin{itemize}
     \item aaaaaa
@@ -182,7 +182,7 @@ Many people...Therefore we are facing the following problems:
 \end{itemize}
 
 % .2
-\textbf{\subsection{Our Works}}
+\subsection{Our Works}
 \begin{itemize}
     \item aaaaaaa
     \item aaaaaa
@@ -190,10 +190,10 @@ Many people...Therefore we are facing the following problems:
 \fancyfoot[C]{\bfseries\thepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Assumptions and Notations
-\textbf{\section{Assumptions and Notations}}
+\section{Assumptions and Notations}
 \vspace{-10pt}
 % Assumptions
-\textbf{\subsection{Assumptions}}
+\subsection{Assumptions}
 Due to the lack of necessary data, we make the following assumptions to help us perform modeling:
 
 \begin{itemize}[itemsep=0.3ex, leftmargin=1.2cm]
@@ -207,11 +207,12 @@ Due to the lack of necessary data, we make the following assumptions to help us 
     \item[8.] A drone can carry either a set of thermal imaging cameras and telemetry sensors or a radio repeater. The former combination can and can only detect any fire outbreak, while the latter can and can only extend the valid zone of radio wave signals.
 \end{itemize}
 % Notations
-\textbf{\subsection{Notations}}
+\subsection{Notations}
 % coordinate system
-\textbf{\subsubsection{\textit{ijk}-coordinate system}}
+\subsubsection{\textit{ijk}-coordinate system}
 Before illustrating the notations for model construction, we would like to introduce a special coordinate system called \textbf{\textit{ijk}-coordinate system}\cite{uber-h3-doc}, which was first proposed by Uber Technologies Inc.
-Discrete hexagon planar grid systems naturally have 3 coordinate axes spaced $120^{\circ}$ apart. We refer to such a system as an \textit{ijk} coordinate system, for the three coordinate axes $i$, $j$, and $k$.
+
+Discrete hexagon planar grid systems naturally have $3$ coordinate axes spaced $120^{\circ}$ apart. We refer to such a system as an \textit{ijk} coordinate system, for the three coordinate axes $i$, $j$, and $k$.
 
 \begin {figure}[h]
 \centering % 居中显示
@@ -221,7 +222,7 @@ Discrete hexagon planar grid systems naturally have 3 coordinate axes spaced $12
 \end {figure}
 
 % Notations
-\textbf{\subsubsection{Notations}}
+\subsubsection{Notations}
 Here are all the notations and their meanings in this paper.
 \begin{table}[h]
     \centering
@@ -255,14 +256,15 @@ Here are all the notations and their meanings in this paper.
         the point $(x,y,z)$ when there are $N$ drones in the field \\
         $Slope
         (x,y,z)$         & Maximum slope of the point $(x,y,z)$    \\
-        $\gamma$         & Factor used to calculate the weight
+        $\gamma$         & Factor related to the weight
         of slope in causing bushfire                               \\
         $\beta
         (x,y,z)$         & Weight of slope in causing bushfire     \\
         $\omega
         (x,y,z)$         & Decreasing rate of signal
         at point $(x,y,z)$                                         \\
-        $\alpha$         & Elevational factor                      \\
+        $\alpha$         & Factor related to the weight
+        of elevation in causing bushfire                           \\
         $Chg
         (q,x,y,z)$       & Location of the $q$-th charging station \\
         $V_{\text{max}}$ & Maximum flying velocity of a drone      \\
@@ -287,11 +289,17 @@ Here are all the notations and their meanings in this paper.
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Model Construction
-\textbf{\section{Model Construction}}
-blablablabla
+\section{Model Construction}
+\subsection{Bushfire risk model}
+
+for segmentation and assessment of the topography
+
+In this section, we introduce a H3 model to data-orienting the topographic conditions of the state Victoria in Australia. First in order to simplify the question, we cover the state with hexagons in dense tiled layout. We consider that the valid zone of radio wave signal radiated by a UAV is a spherical area of radius 20km, and the length of each side of hexagon is 1.22 km. Next, we evaluated each segment from 4 dimensions, which are: density of forest coverage, elevation, slope and fire history. We consider the influence of the listed dimensions from two aspects: how dose it influence the possibility to catch fire for the area and how does it influence the propagation of radio wave signal. The mechanism and significance of these factors are discussed below.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Conclusion
-\textbf{\section{Conclusion}}
+\section{Conclusion}
 We build a.....interesting findings:
 
 \begin{itemize}
@@ -302,7 +310,7 @@ We build a.....interesting findings:
 %%%%%%%%%%%%%%%%%%%%%%%%%%参考文献%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 因为不输出此部分到目录 \addcontentsline{}{}{}是添加此标题到目录
 \newpage
-\textbf{\section*{References}\addcontentsline{toc}{section}{References}}
+\section*{References}\addcontentsline{toc}{section}{References}
 \fancyhf{}
 \fancyhead[R]{ }
 \fancyhead[L]{ }
@@ -311,12 +319,11 @@ We build a.....interesting findings:
 \bibliographystyle{IEEEtran}
 %%%%%%%%%%%%%%%%%%%%%%%%%%附录%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\textbf{\section*{Appendices}\addcontentsline{toc}{section}{Appendices for Code and Data}}
+\section*{Appendices}\addcontentsline{toc}{section}{Appendices for Code and Data}
 \fontsize{13pt}{12.5pt}\selectfont
 Here is Code we used in our model, which python is the main development language.
 \vspace{7pt}
-\textbf{\subsection*{Appendices A}}
-
+\subsection*{Appendices A}
 fooooo
 
 \end{document}
