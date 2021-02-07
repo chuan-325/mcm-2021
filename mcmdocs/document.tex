@@ -222,54 +222,58 @@ Here are all the notations and their meanings in this paper.
     \vspace{3pt}
     \begin{tabular}{>{\centering\arraybackslash}p{6em}>{\centering\arraybackslash}p{30em}}
         \toprule % 绘制第1条线
-        Notation         & Meaning                                                       \\
+        Notation         & Meaning                                      \\
         \midrule % 绘制第2条线
         $M
-        (i,t)$           & Position of the $i$-th drone
-        \uppercase\expandafter{\romannumeral1} at time $t$                               \\
+        (i,t)$           & Location of the $i$-th drone
+        \uppercase\expandafter{\romannumeral1} at time $t$              \\
         $R
-        (j,t)$           & Position of the $j$-th drone
-        \uppercase\expandafter{\romannumeral2} at time $t$                               \\
+        (j,t)$           & Location of the $j$-th drone
+        \uppercase\expandafter{\romannumeral2} at time $t$              \\
         $h
-        (x,y,z)$         & Elevation of the point $(x,y,z)$                              \\
+        (x,y,z)$         & Elevation of the point $(x,y,z)$             \\
         $S
         (x,y,z)$         & Fire history of the point $(x,y,z)$
-        in the passed $5$ years                                                          \\
+        in the passed $5$ years                                         \\
         $a_i
         (x,y,z)$         & Fire history of the point $(x,y,z)$
         in the $2020-i$-th year,
-        $i\in [1,5] \cap \mathbb{N} $                                                    \\
+        $i\in [1,5] \cap \mathbb{N} $                                   \\
         $F(x,y,z) $      & Vegetative and structural
-        condition of the point$(x,y,z)$                                                  \\
+        condition of the point$(x,y,z)$                                 \\
         $S(i,x,y,z,t)$   & Strength of the signal from the $i$-th drone
-        at point $(x,y,z)$ at time $t$                                                   \\
+        at point $(x,y,z)$ at time $t$                                  \\
         $E
         (x,y,z,N)$       & Supervisory density of the point $(x,y,z)$
-        when there are N drones in the field                                             \\
+        when there are $N$ drones in the field                          \\
         $Slope
-        (x,y,z)$         & Maximum slope of the point $(x,y,z)$                          \\
+        (x,y,z)$         & Maximum slope of the point $(x,y,z)$         \\
+        $\gamma$         & Factor used to calculate the weight
+        of slope in causing bushfire                                    \\
         $\beta
-        (x,y,z)$         & Weight of slope                                               \\
-        $\gamma$         & Factor for slope                                              \\
+        (x,y,z)$         & Weight of slope in causing bushfire          \\
         $\omega
-        (x,y,z)$         & Decreasing rate of signal at point $(x,y,z)$                  \\
-        $\alpha$         & Elevational factor                                            \\
+        (x,y,z)$         & Decreasing rate of signal at point $(x,y,z)$ \\
+        $\alpha$         & Elevational factor                           \\
         $Chg
-        (q,x,y,z)$       & $q$th charging station's position                             \\
-        $V_{max}$        & Maximum flying velocity of a drone                            \\
-        $N_{\text{SSA}}$ & Total number of drone
-        \uppercase\expandafter{\romannumeral1}                                           \\
-        $N/repeater$     & Total number of drone
-        \uppercase\expandafter{\romannumeral2}                                           \\
-        $PF$             & Power consumption for a flying drone                          \\
-        $PH$             & Power consumption for a hovering drone                        \\
-        $t_{flying}
-        (T,l)$           & Total time interval for flying at time $T$ for $l$-th drone   \\
-        $t_{hovering}
-        (T,l)$           & Total time interval for hovering at time $T$ for $l$-th drone \\
-        $T$              & Total time                                                    \\
-        $Br$             & Total power for a drone                                       \\
-        $Ini$            & The position of command center                                \\
+        (q,x,y,z)$       & Location of the $q$-th charging station      \\
+        $V_{max}$        & Maximum flying velocity of a drone           \\
+        $N_{\text{SSA}}$ & Amount of drone
+        \uppercase\expandafter{\romannumeral1}                          \\
+        $N/rep$          & Amount of drones
+        \uppercase\expandafter{\romannumeral2}                          \\
+        $PF$             & Power consumption for a flying drone         \\
+        $PH$             & Power consumption for a hovering drone       \\
+        $t_{fl}
+        (t,l)$           & Flight time of the $l$-th drone
+        until time $t$                                                  \\
+        $t_{hov}
+        (t,l)$           & Hovering time of the $l$-th drone
+        until time $t$                                                  \\
+        $T$              & Duration of a day (i.e. $1440 \min$)         \\
+        $t$              & Current time                                 \\
+        $Br$             & Total battery power of a drone               \\
+        $Ini$            & Location of the EOC                          \\
         \bottomrule
     \end{tabular}
 \end{table}
