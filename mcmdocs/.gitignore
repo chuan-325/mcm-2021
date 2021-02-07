@@ -1,5 +1,4 @@
 *.pdf
-figs/
 *.code-workspace
 *.aux
 *.bbl
