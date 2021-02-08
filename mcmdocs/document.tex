@@ -97,14 +97,13 @@
             \begin{center}\textbf{Problem Chosen}\\ \Large \textcolor{red}{B}\end{center}
         }
          & \parbox[t]{0.3\linewidth}{\begin{center}\textbf{2021\\ MCM/ICM\\ Summary Sheet}\end{center}}
-         & \parbox[t]{0.3\linewidth}{\begin{center}\textbf{Team Control Number}\\ \Large \textcolor{red}{2120710}\end{center}} \\
-        \hline
+         & \parbox[t]{0.3\linewidth}{\begin{center}\textbf{Team Control Number}\\ \Large \textcolor{red}{2120710}\end{center}} \\\hline
     \end{tabular}}
 
 \vspace*{3ex}
 
 % 大标题
-{\centering\fontsize{18}{16}\selectfont\textbf{{Fighting Wildfire with Unmanned Aerial Vehicle}}
+{\centering\fontsize{18}{16}\selectfont\textbf{{Fighting Wildfire with Unmanned Aerial Vehicles}}
 
     % summary
     \vspace{10pt}
@@ -124,7 +123,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%MEMO页%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-% 开始写 memo 信
+% 开始写 budget request
 % 更换字体为 palatino 也可以不换
 \setmainfont[
     BoldFont       = texgyrepagella-bold.otf ,
@@ -132,24 +131,52 @@
     BoldItalicFont = texgyrepagella-bolditalic.otf ]{texgyrepagella-regular.otf}
 \newgeometry{left = 3.5cm, right = 3.5cm}
 \thispagestyle{empty}
-% memo标题+信息
-{\centering \fontsize{18pt}{14pt}\selectfont \textbf{Budget Request}\par}
-
-\noindent FROM: Team {} 2120710 , MCM\\
-\noindent To: The group of Governors\\
-\noindent Date: February 8, 2020
-% request正文
+% 抬头
+\begin{center}%不要在'\'后面加方括号
+    \fontsize{20pt}{14pt} % [font size][line space]
+    \selectfont
+    \textsc{\textbf{Budget Request}}
+\end{center}
 \vspace{10pt}
-\\
-这里是br正文。
+% 基本信息
+\noindent \textsc{Project name}: Equipment Procurement for Rapid Bushfire Response
+\\ \noindent \textsc{Date submitted}: February 8th, 2021
+\hrule\vspace{10pt}
+% explanation
+\begin{flushleft}
+    \fontsize{12pt}{10pt} % [font size][line space]
+    \selectfont
+    \indent This Budget Proposal provides necessary costs associated with the above named project (the "Equipment Procurement for Rapid") which we would like to pursue . Costs for the Project have been itemized in this Budget Proposal below and justification has been provided for each cost element. Should you have any questions related to this Budget Proposal, please do not hesitate to contact the undersigned.
+\end{flushleft}
+% request正文
+\paragraph{PROJECT DESCRIPTION\\ } The state of Victoria has a long history of bushfires, which causing life loss and property damage of varying sizes every year. In the recent years, with advances in technology, we have the opportunity to further reduce the impact of bushfires in Victoria. To better protect lives, interests, and the ecosystem of the state, a new division of \textbf{CFA}, named as \textsc{Rapid Bushfire Response}, would be intended to found, which would aiming at responding quickly to bushfires.
 
-% 信多出一页，清理页眉页脚
+\paragraph{PROJECT PURPOSE\\ } In order to equip the proposed new division, it was necessary to build a effective and sensitive monitoring system for bushfires, which could strongly assist the front-line personnel in the daily work of bushfires management. Thus, \textbf{CFA} need the budget to purchase SSA drones and Radio Repeater drones for the monitoring.
+
+\paragraph{COST ELEMENTS\\ }
+
+The following are necessary cost elements of the Project:
+
+%!!!!!!!!!!!!!!!!!yet
+
+\paragraph{COST SUMMARY\\ }
+
+%!!!!!!!!!!!!!!!!!yet
+
+\begin{flushleft}
+    \fontsize{12pt}{10pt} % [font size][line space]
+\selectfont
+\indent This budget was developed by \textbf{CFA} of Victoria with adequate modeling that supported this estimate. By the signature below,  we hereby certify that this Budget Proposal reflects the best estimate of the true and necessary costs for the Project, and the information provided herein is accurate, complete and current as of the date of the signature below.
+\end{flushleft}
+
+% 清理页眉页脚
 \thispagestyle{empty}
-% 信的结尾
-{\raggedleft
-    Sincerely yours,\\
-    MCM Team 2120710\par
-}
+% 落款
+\begin{flushleft}
+    Country Fire Authority, VIC Australia\\
+    {[First Name][Last Name]}\\
+    {[Titile]}
+\end{flushleft}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%目录页%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -384,7 +411,8 @@ The vegetational and urbanizing condition $F(x,y,z)$ is defined as the following
     \right.
 \end{equation}
 
-The influence of fire history is quantified by bushfire frequency in the passed 5 years (i.e. 2016-2020) :%equ.7
+The influence of fire history is quantified by bushfire frequency in the passed 5 years (i.e. 2016-2020) :
+%equ.7
 \begin{equation}\label{Fire-history}
     \begin{aligned}
         S(x,y,z)=\sum_{i=1}^5 (1+\epsilon)^{\frac{1}{i}}\cdot a_i,\quad a_i=\frac{f_i}{23},
@@ -423,11 +451,9 @@ here $u(\delta)$ is the stair function:
 
 \subsubsection{Future situation in a decade}
 %%% M1-Predict
-To predict the changing situation in the next decades, we reevaluate the area in the future with the multi-factor model above. Since we do not take extreme events into consideration (severe war, earthquake, tsunami, meteorolite, EI Nino etc.), the landscape and urban constructions will not change much in the next decade. The only changing factor is the fire history of on point, which was evaluated by Equation \ref{Fire-history}, and the fire “history” in future is represented by the possibility of that year to catch fires, and was described by the function below
+To predict the changing situation in the next decades, we reevaluate the area in the future with the multi-factor model above. Since we do not take extreme events into consideration (severe war, earthquake, tsunami, meteorolite, EI Nino etc.), the landscape and urban constructions will not change much in the next decade.
 
-%!!!!!!!equ10
-
-here the threshold $867.35$ means that the possibility of catch fires is 95\% .
+The only changing factor is the fire history, which was evaluated by Equation \ref{Fire-history}. When assessing the situation in the future, $V(x,y,z)$ should be the possibility of catching bushfires on that year instead. For instance, if $V(x,y,z)>867.35$ holds for sometime in the next decades, it means the possibility of catching bushfires is 95\% .
 
 
 \subsection{Use Nervous System Model to find the best arrangement of UAVs}
