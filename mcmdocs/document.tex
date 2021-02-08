@@ -206,7 +206,9 @@ Due to the lack of necessary data, we make the following assumptions to help us 
     \item[5.] All UAVs are equipped with a timer.
     \item[6.] All UAVs are directed by a preprogrammed system given by us, which means they are all automatic.
     \item[7.] Staffes are always available in any charging stations, which guarantees the UAVs will always work in the stanterd situation.
-    \item[8.] A drone can carry either a set of thermal imaging cameras and telemetry sensors or a radio repeater. The former combination can and can only detect any fire outbreak, while the latter can and can only extend the valid zone of radio wave signals.
+    \item[8.] A drone can carry either a set of thermal imaging cameras and telemetry sensors or a radio repeater. The former combination can and can only detect any fire outbreak while the later combination can and can only extend the valid zone of radio wave signals.
+   \item[9.]\label{ampt09} Since recovering the lost drones is difficult and sometimes even physically impossible, and the cost of buying new ones are very high, we would not allow any drone to land outside the charging stations.
+
 \end{itemize}
 % Notations
 \subsection{Notations}
@@ -249,9 +251,9 @@ Here are all the notations and their meanings in this paper.
         (x,y,z)$         & Fire history of the point $(x,y,z)$
         in the $2020-i$-th year,
         $i\in [1,5] \cap \mathbb{N} $                              \\
-        $F(x,y,z) $      & Vegetative and structural
+        $F(x,y,z) $      & Vegetation and urbanizing
         condition of the point$(x,y,z)$                            \\
-        $S(i,x,y,z,t)$   & Strength of the signal from the
+        $Str(i,x,y,z,t)$   & Signal strength of the
         $i$-th drone at point $(x,y,z)$ at time $t$                \\
         $E
         (x,y,z,N)$       & Supervisory density of
@@ -298,7 +300,7 @@ Here are all the notations and their meanings in this paper.
 % 原文后面还有一小段短语 for Segmentation and Assessment of the Topography
 In this section, we introduce a H3 and multi-factor evaluating model to data-orienting the topographic conditions of the state Victoria in Australia.
 
-First, in order to simplify the question, we cover the state with hexagons in dense tiled layout. We consider that the valid zone of radio wave signal radiated by a UAV is a spherical area of radius $20$ km, and the length of each side of hexagon is $1.22$ km.
+First, in order to simplify the question, we cover the state with hexagons in dense tiled layout. We consider that the valid zone of radio wave signal radiated by a UAV is a spherical area of radius 20 km, and the length of each side of hexagon is 1.22 km.
 
 Next, we evaluated each segment from 4 dimensions, which are: density of forest coverage, elevation, slope and fire history. We consider the influence of the listed dimensions from two aspects: how dose it influence the possibility to catch fire for the area and how does it influence the propagation of radio wave signal. The mechanism and significance of these factors are discussed below.
 
@@ -310,81 +312,214 @@ On the other hand, the leafage has a significant impact on the reflection behavi
 
 Since the given signal's frequency ranges from 300 megahertz to 3,000 megahertz and from 30 megahertz to 300 megahertz, which are considerably high, so it is difficult for the signal to steer by high-rise structures, including tall buildings and mountains. When our drones are passing through the plain area, the the energy lose for the signal strengths is in the air, so the radius of the valid zone for the signal reaches it's maximum of 20km. When the drone is passing a urban area, high obstacles diminished the zone and the radius reaches it's minimum of 5km. When the drones are flying or hovering in forest region, two situations should be discussed separately, the ground signal from wearable devices on front-line personnel and the aerial signal from another drone. According to the data of the experiments done by Y.S. Meng.et.al (2010) \cite{Ng-vhf-radio}, when the signal is launched in woods, the signal strength decreases linearly with the frequency of radio wave, and distance (Y. S. Meng.et.al 2009 \cite{Ng-vhfuhf-ieee}).
 
-According to their model, the foliage loss in forests can be described by the equation below:
-
+According to their model, the foliage loss in forest region is defined by the equation below:
 \begin{equation}\label{ldb}
-    L(dB)\cong 0.48 f^{0.43} d^{0.13}
+    L({\rm dB})\cong 0.48 f^{0.43} d^{0.13}
 \end{equation}
 
-Considering the drone-to-drone signal propagation, we simply omit the influence of trees, for it is reasonable for flying vehicles to stay above the forests. According to Meng, the background noise is around -75dBm, so we consider the signal to be undetectable if it's strength is lower than -70dBm. Which means that when the strength loss is over 18dB, we consider this point to be inaccessible. Using Equation \eqref{ldb} and the data we have, we can verify the decreasing coefficient for different area as follow{equ.2}.
+Considering the drone-to-drone signal propagation, we simply omit the influence of trees, for it is reasonable for flying vehicles to stay above the forests. According to Meng, the background noise is around -75 dBm, so we consider the signal to be undetectable if its strength is lower than -70 dBm. Which means that when the strength loss is over 18 dB, we consider this point to be inaccessible. Using Equation \eqref{ldb} and the data we have, we can verify the decreasing coefficient for different area as follow:
+\begin{equation}\label{omega-function}
+    \overline{\omega}
+    (x,y,z)=
+    \left\{
+    \begin{aligned}
+         & \overline{\omega}_{\text{city}}=0.25,  \\
+         & \overline{\omega}_{\text{forest}}=0.5, \\
+         & \overline{\omega}_{\text{plain}}=1
+    \end{aligned}
+    \right.
+\end{equation}
 
 \subsubsection{The Influence of Elevation and Slope}
 %%% M1F2
-As mentioned before, the Mountains will worsen the signal, so we introduce a elevation factor A here to evaluate the negative affect of elevation.
+As we mentioned above, the Mountains would worsen the signal, thus, it is natural to introduce an elevation factor $A$ here to evaluate the impact of elevation on causing bushfires.
 
 Annual lightning strikes were so connected to local elevation and slope that many scholars have been using topographic methods to predict bush-fire in mountainous regions \cite{Jiao-wildfire-cn}. Previous research has shown that strike density has a great leap while the local elevation reaches 800 meters and increases linearly with elevation \cite{Musa-lightning02}, and it is more likely for a mountainous area to form strikes comparing to an area with only one high-rise peak \cite{Jiao-wildfire-cn}.
 
 
 \subsubsection{The Influence of Fire History}
 %%% M1F3
-Burned area is more likely to be caught on fire in the future \cite{Musa-lightning02}, according to Musa Kilinc and Jason Beringer. Because ecological environment has been destroyed in the fire, which results in a low capability of local temperature and low capacity of water. None the less, the coked ground with dark shade will absorb more heat than green forests. All these traits formed a hot dry area which can be easily lighted by strikes.
+Burned area is more likely to be caught on fire in the future, according to Musa Kilinc and Jason Beringer \cite{Musa-lightning02}. Because ecological environment has been destroyed in the fire, which results in a low capability of local temperature and low capacity of water. None the less, the coked ground with dark shade will absorb more heat than green forests. All these traits formed a hot dry area which can be easily lighted by strikes.
 
-\subsubsection{The Functions We Adopted to Describe the State}
+\subsubsection{Functionizing the state of certain location}
 %%% M1-Function
-Using H3 model we can denote each hexagon with 3 coordinates x, y and z.
+To describe a certain location $(x,y,z)$ in the \textit{ijk} coordinate system, we adopted a series of functions\dots
 
-The elevation is described by {equ.3}
+The elevation of the location is denoted by $h(x,y,z)$ , while its slope is denoted by $Slope(x,y,z)$, which means the maximum slope around one point:
+\begin{equation}\label{slope}
+    \begin{aligned}
+        Slope(x,y,z)&=\max\left\{
+            \frac{\lVert
+                    h(x,y,z)-h(x+m,y+n,z+k)
+                    \rVert}
+            {\lvert m\rvert+\lvert n\rvert+\lvert k\rvert}
+            \right\},\\
+            & m,n,k\in\{-1, 0, 1\},
+        \end{aligned}
+    \end{equation}
 
-The slope is described by {equ.4}
+Besides, The unit of $h(x,y,z)$ and $Slope(x,y,z)$ are both meters.
+\\
+The weight of $Slope(x,y,z)$ in causing bushfires is
+\begin{equation}\label{weight of slope}
+    \begin{aligned}
+        \beta(x,y,z)&=\gamma\cdot \max\left\{
+            \frac{
+                Slope(x,y,z)-Slope(x+m,y+n,z+k)
+                }
+            {\lvert m\rvert+\lvert n\rvert+\lvert k\rvert}
+            \right\},\\
+            &\gamma\text{ is a constant, and } m,n,k\in\{-1, 0, 1\},
+    \end{aligned}
+\end{equation}
 
-which is the maximum slope around one point.
+The vegetational and urbanizing condition $F(x,y,z)$ is defined as the following equation:
+\begin{equation}\label{vegetation}%equ6
+    F(x,y,z)=
+    \left\{
+    \begin{aligned}
+         & 1,\qquad (x,y,z)\text{ locates in forests,} \\
+         & 0,\qquad \text{otherwise.}
+    \end{aligned}
+    \right.
+\end{equation}
 
-Slop weight is defined as {equ.5}, here γ is a constant.
+The influence of fire history is quantified by bushfire frequency in the passed 5 years (i.e. 2016-2020) :%equ.7
+\begin{equation}\label{Fire-history}
+    \begin{aligned}
+        S(x,y,z)=\sum_{i=1}^5 (1+\epsilon)^{\frac{1}{i}}\cdot a_i,\quad a_i=\frac{f_i}{23},
+    \end{aligned}
+\end{equation}
+%!check
+Here $f_i$ is the amount of fire cases in the $n-i$-th year.
 
-The vegetational and urbanization condition is described by {equ.6}
+Then we define a function $V(x,y,z)$ to represent how possible a point will catch fire. It is defined below :
+\begin{equation}\label{PossibilityFire}
+    \begin{aligned}
+        V(x,y,z) =& V_1(x,y,z)\cdot V_2(x,y,z), \\
+        \text{Note: }\quad V_1(x,y,z) &= [
+            0.58 F(x,y,z)\\
+           & +\alpha\left(
+                h(x,y,z)-800
+                 \right)\cdot
+                 \beta\cdot u(h(x,y,z)-800)
+            ], \\
+        V_2(x,y,z) &=\left[
+            1+\frac{\ln \left(1+S\left(x,y,z\right)\right)}{3}
+            \right],
+    \end{aligned}
+\end{equation}
 
-The influence of fire history is described by {equ.7}
-
-here {equ.8} is the amount of fire cases in n-i th year.
-
-
-Then we define a function {equ.9} to represent how possible a point will catch fire. It is defined as below {equ.10}
-
-here h(x,y,z) and Slop(x,y,z) are in meters, u(x) is the stair function, defined as {equ.11}
-
+here $u(\delta)$ is the stair function:
+\begin{equation}\label{Stair}%{equ.11}
+    u(\delta)=
+    \left\{
+    \begin{aligned}
+         & 1,\qquad \delta> 0,\\
+         & 0,\qquad \delta\leq 0.
+    \end{aligned}
+    \right.
+\end{equation}
 
 \subsubsection{Future situation in a decade}
 %%% M1-Predict
-To predict the changing situation in the next decades, we reevaluate the area in the future with the multi-factor model above. Since we do not take extreme events into consideration (severe war, earthquake, tsunami, meteorolite, EI Nino etc.), the landscape and urban constructions will not change much in the next decade. The only changing factor is the fire history of on point, which was evaluated by {equ.7}, and the fire “history” in future is represented by the possibility of that year to catch fires, and was described by the function below
-    {equ.25}
+To predict the changing situation in the next decades, we reevaluate the area in the future with the multi-factor model above. Since we do not take extreme events into consideration (severe war, earthquake, tsunami, meteorolite, EI Nino etc.), the landscape and urban constructions will not change much in the next decade. The only changing factor is the fire history of on point, which was evaluated by Equation \ref{Fire-history}, and the fire “history” in future is represented by the possibility of that year to catch fires, and was described by the function below
 
-here the threshold 0.858 means that the possibility of catch fires is 95%.
+%!!!!!!!equ10
+
+here the threshold $867.35$ means that the possibility of catch fires is 95\% .
 
 
 \subsection{Use Nervous System Model to find the best arrangement of UAVs}
 % M2
 Widespread bushfires in Australia are usually preceded by strong winds, a small-scale burning forests can evolve into destructive fires. So in other to minimize the damage caused by bushfires, it is reasonable to build up a monitoring and alarming system to supervise the region before any outbreaks. In this section, our group build up a model imitating the nervous system to sort out the best arrangement of UAVs.
 
-In our model, drones with thermal imaging cameras and telemetry sensors (drone Ⅰ) are send out to petrol around the state, detecting fire outbreaks and sending back images, they are working as sensors of a nervous system. While drones with radio repeaters (drone Ⅱ) act like ganglion, they receive signals and send them out immediately, the command center is the brain in this system. Our goal is achieved by two steps. First, find the best routes for dronesⅠ. In order to react to fire out breaks timely, the monitoring system should
+In our model, drones with thermal imaging cameras and telemetry sensors (drone \uppercase\expandafter{\romannumeral1}) are send out to petrol around the state, detecting fire outbreaks and sending back images, they are working as sensors of a nervous system. While drones with radio repeaters (drone \uppercase\expandafter{\romannumeral2}) act like ganglion, they receive signals and send them out immediately, the command center is the brain in this system. Our goal is achieved by two steps. First, find the best routes for drones\uppercase\expandafter{\romannumeral1}. In order to react to fire out breaks timely, the monitoring system should
 
-- Cover the state with it’s valid zone,
-- Pay closer attention to the points that are more likely to catch fire.
+\begin{itemize}
+    \item Cover the state with its valid zone,
+    \item Pay closer attention to the points who have higher probability of catching fire.
+\end{itemize}
 
-We define two functions {equ.19} and {equ.20} here to describe the signal strength and average signal density of one point.
+To further the discussion, we have two new functions: first for signal strength, and second for average signal density of one point:
+% equ. 19, 20
+\begin{subequations}
+    \begin{equation}
+        Str(i,x,y,z,t)=u\left(8-\lVert (x,y,z)-M(i,t)\rVert\right),
+    \end{equation}
+    \begin{equation}
+        E(x,y,z,N)=\sum_{i=1}^{N_{\text{SSA}}}\frac{1}{T}\int_{0}^{T}S(i,x,y,z,t)dt,
+    \end{equation}
+\end{subequations}
 
-From the discussion in section 1, we construct the function {equ.9} to evaluate how high the possibility is for a point to catch fire, and here we introduce a function {equ.12} defined as {equ.13} to judge whether a point is safe enough, by safe enough we mean the possibility for any droneⅠ to discover a outbreak immediately is high. Here we set the threshold to be 80 percent, thus {equ.14}.
+From the discussion in section 1, we construct the function \label{PossibilityFire} to evaluate how high the possibility is for a point to catch fire, and here we introduce a function $Judge(x, y,z)$ defined as $Judge(x,y,z)=\frac{\eta \cdot E}{V}-1$ to judge whether a point is safe enough, by safe enough we mean the possibility for any drone \uppercase\expandafter{\romannumeral1} to discover a outbreak immediately is high. Here we set the threshold to be 80 percent, thus $\lambda_{\text{safe}}=0.8$.
 
-Second, we should link the sensors to the brain. As discussed in the section 1, we omit the signal loss caused by forests, but we take the influence of high buildings into consideration. So here we define two kinds of vectors {equ.15} to represent the signal path from sensors to the center. The vectors are defined as below {equ.16}. Here i denotes the number of droneⅠs, while j and k denote the number of droneⅡs.
+Second, we should link the sensors to the brain. As discussed in the section 1, we omit the signal loss caused by forests, but we take the influence of high buildings into consideration. So here we define two kinds of vectors $D_i(t)=[d_{ij}(t)]$ and $Q_j(t)=[b_{jk}(t)]$  to represent the signal path from sensors to the center. The vectors are defined as below
+
+%equ 16
+\begin{subequations}
+    \begin{equation}
+        d_{ij}(t)=\left\{
+            \begin{aligned}
+                &1, \quad \text{if } 0< \lVert M(i,t)-R(j,t)\rVert< 8,\\
+                &0,\quad \text{otherwise},
+            \end{aligned}
+        \right.
+    \end{equation}
+    \begin{equation}
+        b_{jk}(t)=\left\{
+            \begin{aligned}
+                &1, \quad \text{if } 0< \lVert R(k,t)-R(j,t)\rVert< 8,\\
+                &0,\quad \text{otherwise},
+            \end{aligned}
+        \right.
+    \end{equation}
+\end{subequations}
+
+ Here $i$ denotes the number of drone \uppercase\expandafter{\romannumeral1}s, while $j$ and $k$ denote the number of drone \uppercase\expandafter{\romannumeral2}s.
 
 To guarantee that the command center can react to any out break in time, the signal paths should keep unimpeded at all time, then the variables are limited by the following inequality constraints under this requirement.
 
-    {equ.17}
+%equ.17
+\begin{subequations}
+    \begin{equation}
+        \sum_{j=1}^{N_{\text{rep}}}d_{ij}\geq 1, \quad i=1,2,\cdots,N_{\text{SSA}}
+    \end{equation}
+    \begin{equation}
+        \sum_{k=1}^{N_{\text{rep}}}b_{jk}\left\{
+        \begin{aligned}
+            \geq 1,& \qquad \text{if }\sum_{i=1}^{N_{\text{SSA}}} d_{ij}\geq 1,\\
+            \geq 2,& \qquad \text{otherwise},
+        \end{aligned}
+        \right.
+    \end{equation}
+\end{subequations}
 
-One last thing should be considered in this section, which is the recycle of drones. Under assumption 9, none of our drones should be allowed to go further than the distance they can get back to charging stations before they run out of buttery. This give the restrictions below.
+One last thing should be considered in this section, which is the recycle of drones. Under assumption 9 (see \ref{ampt09}), none of our drones would be allowed to go further than the distance they can get back to charging stations before they run out of buttery. This give the constraints below.
 
-    {equ.18}
+% equ. 18
+\begin{subequations}
+    \begin{equation}
+        t_{\text{hov}}+t_{\text{fly}}=t-105n,
+    \end{equation}
+    \begin{equation*}
+     \text{Denotion: }\\
+        k(n, t_{\text{fly}}, t_{\text{hov}}) = n\cdot Br-PF\cdot t_{\text{fly}}-PH\cdot t_{\text{hov}},
+    \end{equation*}
+    \begin{equation}
+        k(n, t_{\text{fly}}, t_{\text{hov}})
+        \geq
+        \frac{\min\left\{
+            \lVert
+                M(i,t)-Chg(q)
+            \rVert ,q
+            \right\}}{
+                0.417\cdot V_{\text{max}}
+                },\text{ for }t\text{ and }i,
+    \end{equation}
+\end{subequations}
 
-Here 0.417 is the transformation coefficient between real velocity and grid velocity, and n is the number of times that ith drone went back to any charge station.
+Here $0.417$ is the transformation coefficient between real velocity and grid velocity, and $n$ shows how many times that $i$-th drone went back to any charging station.
 
 
 \subsection{Model for Rapid Bushfire Response}
@@ -405,9 +540,11 @@ In the first model, we evaluated each hexagons from 4 aspects, and in the third 
 
 It is reasonable for us to assume that the forward teams will never go inside a burning forest, so the valid zone of radio signal only need to cover the premier of any fires. Since we want to keep the drones static to hold the signal path, and at the same time, we need them to come back when they are running out of buttery, so we arrange the drones as below:
 
--We need droneⅡs to keep in touch with the front teams
--We need droneⅠs to monitor and report data from wearable devices on front-line personnel
--As long as there is a fire spotted, except the drones needed to build the communication net, other drones will go back to charge stations to stand by.
+\begin{itemize}
+    \item We need drone \uppercase\expandafter{\romannumeral2}s to keep in touch with the front teams;
+   \item We need drone \uppercase\expandafter{\romannumeral1}s to monitor and report data from wearable devices on front-line personnel;
+    \item As long as there is a fire spotted, except the drones needed to build the communication net, other drones will go back to charge stations to stand by.
+\end{itemize}
 
 To satisfy these requirements we again recalculate the signal strength average signal density as below,
 
