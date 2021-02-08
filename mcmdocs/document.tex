@@ -201,7 +201,7 @@ Due to the lack of necessary data, we make the following assumptions to help us 
 \begin{itemize}[itemsep=0.3ex, leftmargin=1.2cm]
     \item[1.] The circumstance remain unchanged in the time interval we investigated.
     \item[2.] We omit the possibility of any other kinds of aerial vehcle or flying creature hitting our UAV.
-    \item[3.] Accroding to Bureau of Meteorology of Australian Government, litghting is the major causation of bushfire in some area, Victoria included. \cite{ref02} Based on this fact, we evaluat the possibility for a certain place to catch fire with the possibility of a lightning to occour there.
+    \item[3.] Accroding to Bureau of Meteorology of Australian Government, litghting is the major causation of bushfire in some area, Victoria included \cite{au-gov-weather}. Based on this fact, we evaluat the possibility for a certain place to catch fire with the possibility of a lightning to occour there.
     \item[4.]  We adopt the Equal Possibility Hypothesis when our UAVs are patrolling for the purpose of monitoring any outbreak of fire.Under this hypothesis, an area of high possibility to catch fire indicates the frequency of fire outbreak here is high, thus the command center should pay closer attention to this area to alarm fire outbreaks timely.
     \item[5.] All UAVs are equipped with a timer.
     \item[6.] All UAVs are directed by a preprogrammed system given by us, which means they are all automatic.
@@ -212,7 +212,7 @@ Due to the lack of necessary data, we make the following assumptions to help us 
 \subsection{Notations}
 % coordinate system
 \subsubsection{\textit{ijk}-coordinate system}
-Before illustrating the notations for model construction, we would like to introduce a special coordinate system called \textbf{\textit{ijk}-coordinate system}\cite{uber-h3-doc}, which was first proposed by Uber Technologies Inc.
+Before illustrating the notations for model construction, we would like to introduce a special coordinate system called \textbf{\textit{ijk}-coordinate system} \cite{uber-h3-doc}, which was first proposed by Uber Technologies Inc.
 
 Discrete hexagon planar grid systems naturally have $3$ coordinate axes spaced $120^{\circ}$ apart. We refer to such a system as an \textit{ijk} coordinate system, for the three coordinate axes $i$, $j$, and $k$.
 
@@ -304,60 +304,146 @@ Next, we evaluated each segment from 4 dimensions, which are: density of forest 
 
 \subsubsection{The Influence of Vegetation and Other Ground Facilities}
 %%% M1F1
-According to Dissing and Verbyla(2003)\cite{ref01}, thermal circulations triggered by differential heating among distinct types of vegetation results in a higher probability for a lighting strike to occur. But according to a later research based in the State of Victoria (Kilinc and Beringer 2006[****]), vegetation type and density in Southern region of Australia have little impact on the occurrence rate of lightning. Mainly because of the homogeneity of forests.
+According to Dissing and Verbyla (2003) \cite{Dorte-lightning01}, thermal circulations triggered by differential heating among distinct types of vegetation results in a higher probability for a lighting strike to occur. But according to a later research based in the State of Victoria (Kilinc and Beringer 2006 \cite{Musa-lightning02}), vegetation type and density in Southern region of Australia have little impact on the occurrence rate of lightning. Mainly because of the homogeneity of forests.
 
 On the other hand, the leafage has a significant impact on the reflection behavior of radio wave, which plays an important part in the propagation process. Different researches have been done to estimate the decreasing rate of radio wave in varies situations, the shared mechanism underneath is Fresnel's Law. We divided the surroundings into three categories: forests, plain, cities, then we estimated the decrease factor and valid zone for the radio signal distinctively.
 
-Since the given signal's frequency ranges from 300 megahertz to 3,000 megahertz and from 30 megahertz to 300 megahertz, which are considerably high, so it is difficult for the signal to steer by high-rise structures, including tall buildings and mountains. When our drones are passing through the plain area, the the energy lose for the signal strengths is in the air, so the radius of the valid zone for the signal reaches it's maximum of 20km. When the drone is passing a urban area, high obstacles diminished the zone and the radius reaches it's minimum of 5km. When the drones are flying or hovering in forest region, two situations should be discussed separately, the ground signal from wearable devices on front-line personnel and the aerial signal from another drone. According to the data of the experiments done by Y.S. Meng.et.s(2010) [*****], when the signal is launched in woods, the signal strength decreases linearly with the frequency of radio wave, and distance(Y. S. Meng.et.s2009[******]). According to their model, the foliage loss in forests can be described by the equation below{equ.1公式我都写在另一个文档里面}. While considering the drone-to-drone signal propagation, we simply omit the influence of trees, for it is reasonable for flying vehicles to stay above the forests. According to Meng, the background noise is around -75dBm, so we consider the signal to be undetectable if it's strength is lower than -70dBm. Which means that when the strength loss is over 18dB, we consider this point to be inaccessible. Using equation (1) and the data we have, we can verify the decreasing coefficient for different area as follow{equ.2}.
+Since the given signal's frequency ranges from 300 megahertz to 3,000 megahertz and from 30 megahertz to 300 megahertz, which are considerably high, so it is difficult for the signal to steer by high-rise structures, including tall buildings and mountains. When our drones are passing through the plain area, the the energy lose for the signal strengths is in the air, so the radius of the valid zone for the signal reaches it's maximum of 20km. When the drone is passing a urban area, high obstacles diminished the zone and the radius reaches it's minimum of 5km. When the drones are flying or hovering in forest region, two situations should be discussed separately, the ground signal from wearable devices on front-line personnel and the aerial signal from another drone. According to the data of the experiments done by Y.S. Meng.et.al (2010) \cite{Ng-vhf-radio}, when the signal is launched in woods, the signal strength decreases linearly with the frequency of radio wave, and distance (Y. S. Meng.et.al 2009 \cite{Ng-vhfuhf-ieee}).
+
+According to their model, the foliage loss in forests can be described by the equation below:
+
+\begin{equation}\label{ldb}
+    L(dB)\cong 0.48 f^{0.43} d^{0.13}
+\end{equation}
+
+Considering the drone-to-drone signal propagation, we simply omit the influence of trees, for it is reasonable for flying vehicles to stay above the forests. According to Meng, the background noise is around -75dBm, so we consider the signal to be undetectable if it's strength is lower than -70dBm. Which means that when the strength loss is over 18dB, we consider this point to be inaccessible. Using Equation \eqref{ldb} and the data we have, we can verify the decreasing coefficient for different area as follow{equ.2}.
 
 \subsubsection{The Influence of Elevation and Slope}
 %%% M1F2
-blabla
+As mentioned before, the Mountains will worsen the signal, so we introduce a elevation factor A here to evaluate the negative affect of elevation.
+
+Annual lightning strikes were so connected to local elevation and slope that many scholars have been using topographic methods to predict bush-fire in mountainous regions \cite{Jiao-wildfire-cn}. Previous research has shown that strike density has a great leap while the local elevation reaches 800 meters and increases linearly with elevation \cite{Musa-lightning02}, and it is more likely for a mountainous area to form strikes comparing to an area with only one high-rise peak \cite{Jiao-wildfire-cn}.
+
 
 \subsubsection{The Influence of Fire History}
 %%% M1F3
-blabla
+Burned area is more likely to be caught on fire in the future \cite{Musa-lightning02}, according to Musa Kilinc and Jason Beringer. Because ecological environment has been destroyed in the fire, which results in a low capability of local temperature and low capacity of water. None the less, the coked ground with dark shade will absorb more heat than green forests. All these traits formed a hot dry area which can be easily lighted by strikes.
 
 \subsubsection{The Functions We Adopted to Describe the State}
 %%% M1-Function
-blabla
+Using H3 model we can denote each hexagon with 3 coordinates x, y and z.
+
+The elevation is described by {equ.3}
+
+The slope is described by {equ.4}
+
+which is the maximum slope around one point.
+
+Slop weight is defined as {equ.5}, here γ is a constant.
+
+The vegetational and urbanization condition is described by {equ.6}
+
+The influence of fire history is described by {equ.7}
+
+here {equ.8} is the amount of fire cases in n-i th year.
+
+
+Then we define a function {equ.9} to represent how possible a point will catch fire. It is defined as below {equ.10}
+
+here h(x,y,z) and Slop(x,y,z) are in meters, u(x) is the stair function, defined as {equ.11}
+
 
 \subsubsection{Future situation in a decade}
 %%% M1-Predict
-blabla
+To predict the changing situation in the next decades, we reevaluate the area in the future with the multi-factor model above. Since we do not take extreme events into consideration (severe war, earthquake, tsunami, meteorolite, EI Nino etc.), the landscape and urban constructions will not change much in the next decade. The only changing factor is the fire history of on point, which was evaluated by {equ.7}, and the fire “history” in future is represented by the possibility of that year to catch fires, and was described by the function below
+    {equ.25}
+
+here the threshold 0.858 means that the possibility of catch fires is 95%.
+
 
 \subsection{Use Nervous System Model to find the best arrangement of UAVs}
 % M2
-blabla
+Widespread bushfires in Australia are usually preceded by strong winds, a small-scale burning forests can evolve into destructive fires. So in other to minimize the damage caused by bushfires, it is reasonable to build up a monitoring and alarming system to supervise the region before any outbreaks. In this section, our group build up a model imitating the nervous system to sort out the best arrangement of UAVs.
+
+In our model, drones with thermal imaging cameras and telemetry sensors (drone Ⅰ) are send out to petrol around the state, detecting fire outbreaks and sending back images, they are working as sensors of a nervous system. While drones with radio repeaters (drone Ⅱ) act like ganglion, they receive signals and send them out immediately, the command center is the brain in this system. Our goal is achieved by two steps. First, find the best routes for dronesⅠ. In order to react to fire out breaks timely, the monitoring system should
+
+- Cover the state with it’s valid zone,
+- Pay closer attention to the points that are more likely to catch fire.
+
+We define two functions {equ.19} and {equ.20} here to describe the signal strength and average signal density of one point.
+
+From the discussion in section 1, we construct the function {equ.9} to evaluate how high the possibility is for a point to catch fire, and here we introduce a function {equ.12} defined as {equ.13} to judge whether a point is safe enough, by safe enough we mean the possibility for any droneⅠ to discover a outbreak immediately is high. Here we set the threshold to be 80 percent, thus {equ.14}.
+
+Second, we should link the sensors to the brain. As discussed in the section 1, we omit the signal loss caused by forests, but we take the influence of high buildings into consideration. So here we define two kinds of vectors {equ.15} to represent the signal path from sensors to the center. The vectors are defined as below {equ.16}. Here i denotes the number of droneⅠs, while j and k denote the number of droneⅡs.
+
+To guarantee that the command center can react to any out break in time, the signal paths should keep unimpeded at all time, then the variables are limited by the following inequality constraints under this requirement.
+
+    {equ.17}
+
+One last thing should be considered in this section, which is the recycle of drones. Under assumption 9, none of our drones should be allowed to go further than the distance they can get back to charging stations before they run out of buttery. This give the restrictions below.
+
+    {equ.18}
+
+Here 0.417 is the transformation coefficient between real velocity and grid velocity, and n is the number of times that ith drone went back to any charge station.
+
 
 \subsection{Model for Rapid Bushfire Response}
 % M3
-blabla
+Once any fire is spotted, command center will respond to the situation immediately, making sure that the communication network build up by UAVs will available in as possible a short time as possible. As discussed in section 1, the signal from forward teams will be weaken by vegetation and elevation. So here we should reconsider the signal strength around the fire,
+
+{equ.21}
+
+then we recalculate the average signal density of one point depending on time,
+
+{equ.22}
+
+when the new signal density surpass the threshold we set, we regard this point to be accessible and hover the drones to hold the signal. The time interval between the moment fires have been spotted and the time the communication network has been build is the reacting time, and we want it to be as short as possible. Under these assumptions we can find out an efficient way to re-construct the distribution of drones.
 
 % M4
 \subsection{Model for Hovering Drones for Fires of Different Sizes on Different Terrains}
-blabla
+In the first model, we evaluated each hexagons from 4 aspects, and in the third model we considered the decreasing rate in different terrains, so in this model we combine this two models to sort out the best hovering positions for fires of different sizes on different terrains.
+
+It is reasonable for us to assume that the forward teams will never go inside a burning forest, so the valid zone of radio signal only need to cover the premier of any fires. Since we want to keep the drones static to hold the signal path, and at the same time, we need them to come back when they are running out of buttery, so we arrange the drones as below:
+
+-We need droneⅡs to keep in touch with the front teams
+-We need droneⅠs to monitor and report data from wearable devices on front-line personnel
+-As long as there is a fire spotted, except the drones needed to build the communication net, other drones will go back to charge stations to stand by.
+
+To satisfy these requirements we again recalculate the signal strength average signal density as below,
+
+{equ.23}
+
+    {equ.24}
+
+because the drones are now static, the signal now is a constant as time changes.
+
+We also need the forward drones to be connected to the command center. This restriction is described by the formulas below.
+
+    {equ.16}
+
+    {equ.17}
+
 
 \section{Model Simulation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Model Simulation
-blabla
+
 
 \subsection{Nervous System model for UAVs Monitoring System}
 % S1
-blabla
+
 
 \subsubsection{Adapting for Future}
 % 这里有点奇怪
-blabla
+
 
 \subsection{Modeling for Rapid Bushfire Response}
 % S2
-blabla
+
 
 \subsection{Model for the hovering drones SSA and Radio Repeater}
 % S3
-blabla
+
 
 \section{Sensitive Analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -365,15 +451,15 @@ blabla
 \subsection{ensitivity of parameters}
 abaaba
 \subsection{Robusticity of the models}
-blabla
+
 \section{Strength and Weakness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Strength and Weakness
 \subsection{Strength}
-blabla
+
 
 \subsection{Weakness}
-blabla
+
 
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -396,6 +482,7 @@ We build a.....interesting findings:
 \Large
 \bibliographystyle{IEEEtran}
 \newpage
+
 \section*{Appendices}\addcontentsline{toc}{section}{Appendices for Code and Data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%附录%%%%%%%%%%%%%%%%%%%%%%%%%%
 \fontsize{13pt}{12.5pt}\selectfont
