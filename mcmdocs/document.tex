@@ -397,7 +397,7 @@ Then we define a function $V(x,y,z)$ to represent how possible a point will catc
 \begin{equation}\label{PossibilityFire}
     \begin{aligned}
         V(x,y,z) =& V_1(x,y,z)\cdot V_2(x,y,z), \\
-        \text{Note: }\quad V_1(x,y,z) &= [
+        \text{Note: }\qquad V_1(x,y,z) &= [
             0.58 F(x,y,z)\\
            & +\alpha\left(
                 h(x,y,z)-800
@@ -454,7 +454,7 @@ To further the discussion, we have two new functions: first for signal strength,
 
 From the discussion in section 1, we construct the function \label{PossibilityFire} to evaluate how high the possibility is for a point to catch fire, and here we introduce a function $Judge(x, y,z)$ defined as $Judge(x,y,z)=\frac{\eta \cdot E}{V}-1$ to judge whether a point is safe enough, by safe enough we mean the possibility for any drone \uppercase\expandafter{\romannumeral1} to discover a outbreak immediately is high. Here we set the threshold to be 80 percent, thus $\lambda_{\text{safe}}=0.8$.
 
-Second, we should link the sensors to the brain. As discussed in the section 1, we omit the signal loss caused by forests, but we take the influence of high buildings into consideration. So here we define two kinds of vectors $D_i(t)=[d_{ij}(t)]$ and $Q_j(t)=[b_{jk}(t)]$  to represent the signal path from sensors to the center. The vectors are defined as below
+Second, we should link the sensors to the brain. As discussed in the section 1, we omit the signal loss caused by forests, but we take the influence of high buildings into consideration. So here we define two kinds of vectors $D_i(t)=[d_{ij}(t)]$ and $Q_j(t)=[b_{jk}(t)]$  to represent the signal path from sensors to the center. The vectors are defined as below:
 
 %equ 16
 \begin{subequations}
@@ -495,7 +495,7 @@ To guarantee that the command center can react to any out break in time, the sig
     \end{equation}
 \end{subequations}
 
-One last thing should be considered in this section, which is the recycle of drones. Under assumption 9 (see \ref{ampt09}), none of our drones would be allowed to go further than the distance they can get back to charging stations before they run out of buttery. This give the constraints below.
+One last thing should be considered in this section, which is the recycle of drones. Under assumption 9 (see section \ref{ampt09}), none of our drones would be allowed to go further than the distance they can get back to charging stations before they run out of buttery. This give the constraints below.
 
 % equ. 18
 \begin{subequations}
@@ -503,19 +503,28 @@ One last thing should be considered in this section, which is the recycle of dro
         t_{\text{hov}}+t_{\text{fly}}=t-105n,
     \end{equation}
     \begin{equation*}
-     \text{Denotion: }\\
-        k(n, t_{\text{fly}}, t_{\text{hov}}) = n\cdot Br-PF\cdot t_{\text{fly}}-PH\cdot t_{\text{hov}},
+            \text{Denotion:    }
+            k(n, t_{\text{fly}}, t_{\text{hov}}) = n\cdot Br-PF\cdot t_{\text{fly}}-PH\cdot t_{\text{hov}},
     \end{equation*}
     \begin{equation}
-        k(n, t_{\text{fly}}, t_{\text{hov}})
-        \geq
-        \frac{\min\left\{
-            \lVert
+    \begin{aligned}
+        \qquad\qquad & k(n, t_{\text{fly}}, t_{\text{hov}})
+        \geq\frac{\min\left\{\lVert
                 M(i,t)-Chg(q)
             \rVert ,q
             \right\}}{
                 0.417\cdot V_{\text{max}}
-                },\text{ for }t\text{ and }i,
+                },
+        \ \forall t\forall i,\\
+        & k(n, t_{\text{fly}}, t_{\text{hov}})
+        \geq\frac{\min\left\{\lVert
+                R(j,t)-Chg(q)
+            \rVert ,q
+            \right\}}{
+                0.417\cdot V_{\text{max}}
+                },
+        \ \forall t\forall j,
+    \end{aligned}
     \end{equation}
 \end{subequations}
 
@@ -526,11 +535,23 @@ Here $0.417$ is the transformation coefficient between real velocity and grid ve
 % M3
 Once any fire is spotted, command center will respond to the situation immediately, making sure that the communication network build up by UAVs will available in as possible a short time as possible. As discussed in section 1, the signal from forward teams will be weaken by vegetation and elevation. So here we should reconsider the signal strength around the fire,
 
-{equ.21}
+%equ.21
+\begin{equation}
+    Str^{\prime}(i,x,y,z,t)
+    =u\cdot\left[
+            \overline{\omega}\cdot 8
+            -\lVert
+                (x,y,z)-M(i,t)
+            \rVert
+        \right]
+\end{equation}
 
 then we recalculate the average signal density of one point depending on time,
 
-{equ.22}
+%{equ.22}
+\begin{equation}
+    E(x,y,z,N,t)=\sum_{i=1}^{N_{\text{SSA}}}\frac{1}{T}\int_{0}^{T}S(i,x,y,z,\tau)d\tau,
+\end{equation}
 
 when the new signal density surpass the threshold we set, we regard this point to be accessible and hover the drones to hold the signal. The time interval between the moment fires have been spotted and the time the communication network has been build is the reacting time, and we want it to be as short as possible. Under these assumptions we can find out an efficient way to re-construct the distribution of drones.
 
@@ -548,17 +569,66 @@ It is reasonable for us to assume that the forward teams will never go inside a 
 
 To satisfy these requirements we again recalculate the signal strength average signal density as below,
 
-{equ.23}
+%{equ.23}
+\begin{equation}
+    Str_{\chi}(i,x,y,z)
+    =u\cdot\left[
+            \overline{\omega}\cdot 8
+            -\lVert
+                (x,y,z)-M(i)
+            \rVert
+        \right],
+    \chi=\text{\small\uppercase\expandafter{\romannumeral1}}\text{\small ,}
+    \text{\small\uppercase\expandafter{\romannumeral2}}\text{\small ,}
+\end{equation}
 
-    {equ.24}
+
+%{equ.24}
+\begin{equation}
+    E_{\chi}(x,y,z)
+    =\sum_{i=1}^{N}Str_{\chi}(i,x,y,z)
+    \chi=\text{\small\uppercase\expandafter{\romannumeral1}}\text{\small ,}
+    \text{\small\uppercase\expandafter{\romannumeral2}},
+    \chi=\text{\small\uppercase\expandafter{\romannumeral1}}\text{\small ,}
+    \text{\small\uppercase\expandafter{\romannumeral2}},
+\end{equation}
 
 because the drones are now static, the signal now is a constant as time changes.
 
 We also need the forward drones to be connected to the command center. This restriction is described by the formulas below.
 
-    {equ.16}
-
-    {equ.17}
+%equ 16.17
+% 16
+\begin{subequations}
+    \begin{equation}
+        d_{ij}(t)=\left\{
+            \begin{aligned}
+                &1, \quad \text{if } 0< \lVert M(i,t)-R(j,t)\rVert< 8,\\
+                &0,\quad \text{otherwise},
+            \end{aligned}
+        \right.
+    \end{equation}
+    \begin{equation}
+        b_{jk}(t)=\left\{
+            \begin{aligned}
+                &1, \quad \text{if } 0< \lVert R(k,t)-R(j,t)\rVert< 8,\\
+                &0,\quad \text{otherwise},
+            \end{aligned}
+        \right.
+    \end{equation}
+% 17
+    \begin{equation}
+        \sum_{j=1}^{N_{\text{rep}}}d_{ij}\geq 1, \quad i=1,2,\cdots,N_{\text{SSA}}
+    \end{equation}
+    \begin{equation}
+        \sum_{k=1}^{N_{\text{rep}}}b_{jk}\left\{
+        \begin{aligned}
+            \geq 1,& \qquad \text{if }\sum_{i=1}^{N_{\text{SSA}}} d_{ij}\geq 1,\\
+            \geq 2,& \qquad \text{otherwise},
+        \end{aligned}
+        \right.
+    \end{equation}
+\end{subequations}
 
 
 \section{Model Simulation}
