@@ -170,9 +170,10 @@
 \fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
 \fancyhead[L]{Team \# 2120710}
 \fancyfoot[C]{\bfseries\thepage}
+
+\section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Introduction
-\section{Introduction}
 % .1
 \subsection{Restatement of the Problem}
 Many people...Therefore we are facing the following problems:
@@ -188,9 +189,10 @@ Many people...Therefore we are facing the following problems:
     \item aaaaaa
 \end{itemize}
 \fancyfoot[C]{\bfseries\thepage}
+
+\section{Assumptions and Notations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Assumptions and Notations
-\section{Assumptions and Notations}
 \vspace{-10pt}
 % Assumptions
 \subsection{Assumptions}
@@ -287,19 +289,95 @@ Here are all the notations and their meanings in this paper.
         \bottomrule
     \end{tabular}
 \end{table}
+\section{Model Construction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Model Construction
-\section{Model Construction}
-\subsection{Bushfire risk model}
-\subsubsection{why}
-for segmentation and assessment of the topography
+\subsection{Multi-factor Evaluating Model}
+% M1
+% 标题太长了 会改的
+% 原文后面还有一小段短语 for Segmentation and Assessment of the Topography
+In this section, we introduce a H3 and multi-factor evaluating model to data-orienting the topographic conditions of the state Victoria in Australia.
 
-In this section, we introduce a H3 model to data-orienting the topographic conditions of the state Victoria in Australia. First in order to simplify the question, we cover the state with hexagons in dense tiled layout. We consider that the valid zone of radio wave signal radiated by a UAV is a spherical area of radius 20km, and the length of each side of hexagon is 1.22 km. Next, we evaluated each segment from 4 dimensions, which are: density of forest coverage, elevation, slope and fire history. We consider the influence of the listed dimensions from two aspects: how dose it influence the possibility to catch fire for the area and how does it influence the propagation of radio wave signal. The mechanism and significance of these factors are discussed below.
+First, in order to simplify the question, we cover the state with hexagons in dense tiled layout. We consider that the valid zone of radio wave signal radiated by a UAV is a spherical area of radius $20$ km, and the length of each side of hexagon is $1.22$ km.
 
+Next, we evaluated each segment from 4 dimensions, which are: density of forest coverage, elevation, slope and fire history. We consider the influence of the listed dimensions from two aspects: how dose it influence the possibility to catch fire for the area and how does it influence the propagation of radio wave signal. The mechanism and significance of these factors are discussed below.
 
+\subsubsection{The Influence of Vegetation and Other Ground Facilities}
+%%% M1F1
+According to Dissing and Verbyla(2003)\cite{ref01}, thermal circulations triggered by differential heating among distinct types of vegetation results in a higher probability for a lighting strike to occur. But according to a later research based in the State of Victoria (Kilinc and Beringer 2006[****]), vegetation type and density in Southern region of Australia have little impact on the occurrence rate of lightning. Mainly because of the homogeneity of forests.
+
+On the other hand, the leafage has a significant impact on the reflection behavior of radio wave, which plays an important part in the propagation process. Different researches have been done to estimate the decreasing rate of radio wave in varies situations, the shared mechanism underneath is Fresnel's Law. We divided the surroundings into three categories: forests, plain, cities, then we estimated the decrease factor and valid zone for the radio signal distinctively.
+
+Since the given signal's frequency ranges from 300 megahertz to 3,000 megahertz and from 30 megahertz to 300 megahertz, which are considerably high, so it is difficult for the signal to steer by high-rise structures, including tall buildings and mountains. When our drones are passing through the plain area, the the energy lose for the signal strengths is in the air, so the radius of the valid zone for the signal reaches it's maximum of 20km. When the drone is passing a urban area, high obstacles diminished the zone and the radius reaches it's minimum of 5km. When the drones are flying or hovering in forest region, two situations should be discussed separately, the ground signal from wearable devices on front-line personnel and the aerial signal from another drone. According to the data of the experiments done by Y.S. Meng.et.s(2010) [*****], when the signal is launched in woods, the signal strength decreases linearly with the frequency of radio wave, and distance(Y. S. Meng.et.s2009[******]). According to their model, the foliage loss in forests can be described by the equation below{equ.1公式我都写在另一个文档里面}. While considering the drone-to-drone signal propagation, we simply omit the influence of trees, for it is reasonable for flying vehicles to stay above the forests. According to Meng, the background noise is around -75dBm, so we consider the signal to be undetectable if it's strength is lower than -70dBm. Which means that when the strength loss is over 18dB, we consider this point to be inaccessible. Using equation (1) and the data we have, we can verify the decreasing coefficient for different area as follow{equ.2}.
+
+\subsubsection{The Influence of Elevation and Slope}
+%%% M1F2
+blabla
+
+\subsubsection{The Influence of Fire History}
+%%% M1F3
+blabla
+
+\subsubsection{The Functions We Adopted to Describe the State}
+%%% M1-Function
+blabla
+
+\subsubsection{Future situation in a decade}
+%%% M1-Predict
+blabla
+
+\subsection{Use Nervous System Model to find the best arrangement of UAVs}
+% M2
+blabla
+
+\subsection{Model for Rapid Bushfire Response}
+% M3
+blabla
+
+% M4
+\subsection{Model for Hovering Drones for Fires of Different Sizes on Different Terrains}
+blabla
+
+\section{Model Simulation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Model Simulation
+blabla
+
+\subsection{Nervous System model for UAVs Monitoring System}
+% S1
+blabla
+
+\subsubsection{Adapting for Future}
+% 这里有点奇怪
+blabla
+
+\subsection{Modeling for Rapid Bushfire Response}
+% S2
+blabla
+
+\subsection{Model for the hovering drones SSA and Radio Repeater}
+% S3
+blabla
+
+\section{Sensitive Analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Sensitive Analysis
+\subsection{ensitivity of parameters}
+abaaba
+\subsection{Robusticity of the models}
+blabla
+\section{Strength and Weakness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Strength and Weakness
+\subsection{Strength}
+blabla
+
+\subsection{Weakness}
+blabla
+
+\section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Conclusion
-\section{Conclusion}
 We build a.....interesting findings:
 
 \begin{itemize}
@@ -307,19 +385,19 @@ We build a.....interesting findings:
     \item aaaaaaa
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%参考文献%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 因为不输出此部分到目录 \addcontentsline{}{}{}是添加此标题到目录
 \newpage
 \section*{References}\addcontentsline{toc}{section}{References}
+%%%%%%%%%%%%%%%%%%%%%%%%%%参考文献%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 因为不输出此部分到目录 \addcontentsline{}{}{}是添加此标题到目录
 \fancyhf{}
 \fancyhead[R]{ }
 \fancyhead[L]{ }
 \bibliography{books}
 \Large
 \bibliographystyle{IEEEtran}
-%%%%%%%%%%%%%%%%%%%%%%%%%%附录%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section*{Appendices}\addcontentsline{toc}{section}{Appendices for Code and Data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%附录%%%%%%%%%%%%%%%%%%%%%%%%%%
 \fontsize{13pt}{12.5pt}\selectfont
 foooo
 \vspace{7pt}
