@@ -23,6 +23,7 @@
 \usepackage{array} % 设置表格的列格式
 \usepackage{graphicx} % 插图片
 \graphicspath{{C:/Users/zheng/Desktop/mcm-2021/mcmdocs/figs/}}
+\usepackage{float} % 浮动体宏包 可禁用浮动效果
 % 数学样式
 \usepackage{amsmath} % 使用数学宏包
 \usepackage{amsfonts} % 使用数学字体
@@ -172,7 +173,6 @@ With these two kinds of drones, we can build a monitoring and quick-reacting sys
 \section{Assumptions and Notations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Assumptions and Notations
-\vspace{-10pt}
 % Assumptions
 \subsection{Assumptions}
 Due to the lack of necessary data, we make the following assumptions:
@@ -671,7 +671,7 @@ Besides, The optimal positions of hover drones are depending on different region
 \includegraphics[scale=0.45]{plain.png}
 \caption{Plain Area} % 标题
 \end {figure}
-\clearpage
+\FloatBarrier
 The changing likelihood of fire events over the next decade in our model was partly illustrated below:
 
 %{gra4},{gra5},
@@ -699,8 +699,8 @@ We predict that if the likelihood for huge fires rise the cost on radio repeater
 % 基本信息
 \begin{flushleft}
     {\small
-    \noindent \textsc{Project Name}: Equipment Procurement for Rapid Bushfire Response
-    \\ \noindent \textsc{Date Submitted}: February 8th, 2021}
+        \noindent \textsc{Project Name}: Equipment Procurement for Rapid Bushfire Response
+        \\ \noindent \textsc{Date Submitted}: February 8th, 2021}
 \end{flushleft}
 \vspace{10pt}
 %\hrule
@@ -730,22 +730,18 @@ The following are necessary cost elements of the Project:
 
 \begin{table*}[h]
     \centering
-    \caption{The Model's Reliance to the Parameter}
     \vspace{3pt}
     \begin{tabular}{>{\centering\arraybackslash}p{15em}>{\centering\arraybackslash}p{20em}}
         \toprule % 绘制第1条线
         \textsc{Item Name}                  & \textsc{Total Estimated Cost} \\
         \midrule % 绘制第2条线
-        Drones {\small (including 2 types)} & $140, 000$                    \\
+        Drones {\small (including 2 types)} & $\$140, 000$                  \\
         \bottomrule % 绘制第3条线
     \end{tabular}
 \end{table*}
 
-\begin{flushleft}
-    \fontsize{12pt}{10pt} % [font size][line space]
-    \selectfont
-    \indent This budget was developed by \textbf{CFA} of Victoria with adequate modeling that supported this estimate. By the signature below,  we hereby certify that this Budget Proposal reflects the best estimate of the true and necessary costs for the Project, and the information provided herein is accurate, complete and current as of the date of the signature below.
-\end{flushleft}
+\FloatBarrier
+This budget was developed by \textbf{CFA} of Victoria with adequate modeling that supported this estimate. By the signature below,  we hereby certify that this Budget Proposal reflects the best estimate of the true and necessary costs for the Project, and the information provided herein is accurate, complete and current as of the date of the signature below.
 
 % 清理页眉页脚
 \thispagestyle{empty}
