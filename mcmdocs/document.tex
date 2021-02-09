@@ -114,69 +114,24 @@
 \fontsize{13}{12.5}\selectfont %summary正文字体 13 pt
 \begin{adjustwidth}{1cm}{1cm}
     \indent { }{ }{ }{ }{ }{ }
-    在这里写summary
+    In this research, we developed three models to simulate the use of Unmanned Aerial Vehicle in fighting fires. We use a hexagon coordinate system to modelize the region, and apply multi-factor evaluation to represent the landscape condition of the region. We also visualize the result to have a straight forward understanding to the situation.
+
+    We use a Nervous System Model to describe the drones monitoring system. We use dynamic planning to sort out the solution: the least amount of SSA drones and repeater drones needed is $36$ and $96$.
+
+    We use Drone-Terrian model to design the optimal hovering positions for drones in different terrains,we also visualize the result to give out the best hovering strategy.
+
 
     % 关键词
     \vspace{15pt}
-    \textbf{key words} : 关键词1; 关键词2; 关键词3
+    \textbf{key words} : Dynamic planning; Hexagonal coordinate system; Bushfire; Drones
 \end{adjustwidth}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%MEMO页%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-% 开始写 budget request
-% 更换字体为 palatino 也可以不换
+% 设置正文字体与geometry
 \setmainfont[
     BoldFont       = texgyrepagella-bold.otf ,
     ItalicFont     = texgyrepagella-italic.otf ,
     BoldItalicFont = texgyrepagella-bolditalic.otf ]{texgyrepagella-regular.otf}
 \newgeometry{left = 3.5cm, right = 3.5cm}
-\thispagestyle{empty}
-% 抬头
-\begin{center}%不要在'\'后面加方括号
-    \fontsize{20pt}{14pt} % [font size][line space]
-    \selectfont
-    \textsc{\textbf{Budget Request}}
-\end{center}
-\vspace{10pt}
-% 基本信息
-\noindent \textsc{Project name}: Equipment Procurement for Rapid Bushfire Response
-\\ \noindent \textsc{Date submitted}: February 8th, 2021
-\hrule\vspace{10pt}
-% explanation
-\begin{flushleft}
-    \fontsize{12pt}{10pt} % [font size][line space]
-    \selectfont
-    \indent This Budget Proposal provides necessary costs associated with the above named project (the "Equipment Procurement for Rapid") which we would like to pursue . Costs for the Project have been itemized in this Budget Proposal below and justification has been provided for each cost element. Should you have any questions related to this Budget Proposal, please do not hesitate to contact the undersigned.
-\end{flushleft}
-% request正文
-\paragraph{PROJECT DESCRIPTION\\ } The state of Victoria has a long history of bushfires, which causing life loss and property damage of varying sizes every year. In the recent years, with advances in technology, we have the opportunity to further reduce the impact of bushfires in Victoria. To better protect lives, interests, and the ecosystem of the state, a new division of \textbf{CFA}, named as \textsc{Rapid Bushfire Response}, would be intended to found, which would aiming at responding quickly to bushfires.
-
-\paragraph{PROJECT PURPOSE\\ } In order to equip the proposed new division, it was necessary to build a effective and sensitive monitoring system for bushfires, which could strongly assist the front-line personnel in the daily work of bushfires management. Thus, \textbf{CFA} need the budget to purchase SSA drones and Radio Repeater drones for the monitoring.
-
-\paragraph{COST ELEMENTS\\ }
-
-The following are necessary cost elements of the Project:
-
-%!!!!!!!!!!!!!!!!!yet
-
-\paragraph{COST SUMMARY\\ }
-
-%!!!!!!!!!!!!!!!!!yet
-
-\begin{flushleft}
-    \fontsize{12pt}{10pt} % [font size][line space]
-\selectfont
-\indent This budget was developed by \textbf{CFA} of Victoria with adequate modeling that supported this estimate. By the signature below,  we hereby certify that this Budget Proposal reflects the best estimate of the true and necessary costs for the Project, and the information provided herein is accurate, complete and current as of the date of the signature below.
-\end{flushleft}
-
-% 清理页眉页脚
-\thispagestyle{empty}
-% 落款
-\begin{flushleft}
-    Country Fire Authority, VIC Australia\\
-    {[First Name][Last Name]}\\
-    {[Titile]}
-\end{flushleft}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%目录页%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -202,19 +157,16 @@ The following are necessary cost elements of the Project:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Introduction
 % .1
-\subsection{Restatement of the Problem}
-Many people...Therefore we are facing the following problems:
-\begin{itemize}
-    \item aaaaaa
-    \item aaaaaaa
-\end{itemize}
+%\subsection{Restatement of the Problem}
+Australia is one of the countries around the world with the perennial problem of wildfire. Devastating fire can destroy forests, burn down houses and even causes life loss. Even though fighting fires is a dangerous task some times cause death, there are brave and selfless "Boots-on-the-ground" forward teams striving to protect civilians.
 
-% .2
-\subsection{Our Works}
-\begin{itemize}
-    \item aaaaaaa
-    \item aaaaaa
-\end{itemize}
+Fortunately, the advances of technology brings us Unmanned Aerial Vehicle (UAV), which provides a possible solution. WileE–15.2X Hybrid Drone is one kind of UAV. It weights 1.3 kg when equipped with certain devices. The WileE drone can keep flying for 2.5 hours or keep hovering for 2 hours if was fully charged.
+The drones equipped with thermal imaging cameras and telemetry sensors are called surveillance and situational awareness(SSA) drones. SSA drones can collect data from front-line personnel and detect the local temperature.
+Other drones equipped with radio repeater can receive signals and  extend radio range.
+
+With these two kinds of drones, we can build a monitoring and quick-reacting system to detect fire out breaks and connect the front teams to EOC.
+
+
 \fancyfoot[C]{\bfseries\thepage}
 
 \section{Assumptions and Notations}
@@ -223,38 +175,37 @@ Many people...Therefore we are facing the following problems:
 \vspace{-10pt}
 % Assumptions
 \subsection{Assumptions}
-Due to the lack of necessary data, we make the following assumptions to help us perform modeling:
+Due to the lack of necessary data, we make the following assumptions:
 
 \begin{itemize}[itemsep=0.3ex, leftmargin=1.2cm]
-    \item[1.] The circumstance remain unchanged in the time interval we investigated.
-    \item[2.] We omit the possibility of any other kinds of aerial vehcle or flying creature hitting our UAV.
-    \item[3.] Accroding to Bureau of Meteorology of Australian Government, litghting is the major causation of bushfire in some area, Victoria included \cite{au-gov-weather}. Based on this fact, we evaluat the possibility for a certain place to catch fire with the possibility of a lightning to occour there.
-    \item[4.]  We adopt the Equal Possibility Hypothesis when our UAVs are patrolling for the purpose of monitoring any outbreak of fire.Under this hypothesis, an area of high possibility to catch fire indicates the frequency of fire outbreak here is high, thus the command center should pay closer attention to this area to alarm fire outbreaks timely.
-    \item[5.] All UAVs are equipped with a timer.
-    \item[6.] All UAVs are directed by a preprogrammed system given by us, which means they are all automatic.
-    \item[7.] Staffes are always available in any charging stations, which guarantees the UAVs will always work in the stanterd situation.
-    \item[8.] A drone can carry either a set of thermal imaging cameras and telemetry sensors or a radio repeater. The former combination can and can only detect any fire outbreak while the later combination can and can only extend the valid zone of radio wave signals.
-   \item[9.]\label{ampt09} Since recovering the lost drones is difficult and sometimes even physically impossible, and the cost of buying new ones are very high, we would not allow any drone to land outside the charging stations.
+    \item[1.] Considering the flight altitude and cruise path of the drone, the possibility of the drone encountering any accident could be ignored.
+    \item[2.] Accroding to Bureau of Meteorology of Australian Government, lightning is the leading cause of bushfires in southeastern Australia. \cite{au-gov-weather}. Since Victoria is right in the area, we would like to consider lightning as a factor that would have impact on the possibility for a certain place to catch wildfires.
+    \item[3.] Equal Possibility Hypothesis is adopted when modeling.
+    \item[4.] All UAVs are equipped with a timer.
+    \item[5.] All UAVs are directed by a preprogrammed system, i.e. they decide the routes for themselves.
+    \item[8.] The UAVs could always be charged as soon as they land at charging stations, as staffs are always available there.
+    \item[9.]\label{ampt09} Since recovering the lost drones is difficult and sometimes even physically impossible, and the cost of buying new ones are very high, we would not allow any drone to land outside the charging stations.
 
 \end{itemize}
 % Notations
 \subsection{Notations}
 % coordinate system
-\subsubsection{\textit{ijk}-coordinate system}
-Before illustrating the notations for model construction, we would like to introduce a special coordinate system called \textbf{\textit{ijk}-coordinate system} \cite{uber-h3-doc}, which was first proposed by Uber Technologies Inc.
+\subsubsection{\textit{ijk} coordinate system}
+Before illustrating the notations for model construction, we would like to introduce a special coordinate system called \textbf{\textit{ijk} coordinate system} \cite{uber-h3-doc}, which was first proposed by Uber Technologies Inc.
 
 Discrete hexagon planar grid systems naturally have $3$ coordinate axes spaced $120^{\circ}$ apart. We refer to such a system as an \textit{ijk} coordinate system, for the three coordinate axes $i$, $j$, and $k$.
 
 \begin {figure}[h]
 \centering % 居中显示
 %\includegraphics[width=15cm,height=12cm]{ijkp.png}
-\includegraphics[scale=0.3]{ijkp.png}
-\caption{One possible map example that using the \textit{ijk} coordinate system} % 标题
+\includegraphics[scale=0.4]{ijkp.png}
+\caption{Map Sample with One Possible \textit{ijk} Coordinate System} % 标题
 \end {figure}
 
+\newpage
+\subsubsection{Notations Based on the \textit{ijk} coordinate system}
 % Notations
-\subsubsection{Notations}
-Here are all the notations and their meanings in this paper.
+The notations used in this paper are listed as follows:
 \begin{table}[h]
     \centering
     \caption{Notations used in model construction}
@@ -280,11 +231,11 @@ Here are all the notations and their meanings in this paper.
         $i\in [1,5] \cap \mathbb{N} $                              \\
         $F(x,y,z) $      & Vegetation and urbanizing
         condition of the point$(x,y,z)$                            \\
-        $Str(i,x,y,z,t)$   & Signal strength of the
+        $Str(i,x,y,z,t)$ & Signal strength of the
         $i$-th drone at point $(x,y,z)$ at time $t$                \\
         $E
-        (x,y,z,N)$       & Supervisory density of
-        the point $(x,y,z)$ when there are $N$ drones in the field \\
+        (x,y,z,N)$       & Supervisory density of the
+        point $(x,y,z)$ when there are $N$ drones in the field     \\
         $Slope
         (x,y,z)$         & Maximum slope of the point $(x,y,z)$    \\
         $\gamma$         & Factor related to the weight
@@ -315,36 +266,50 @@ Here are all the notations and their meanings in this paper.
         $t$              & Current time                            \\
         $Br$             & Total battery power of a drone          \\
         $Ini$            & Location of the EOC                     \\
-        \bottomrule
+        \bottomrule % 绘制第3条线
     \end{tabular}
 \end{table}
+
 \section{Model Construction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Model Construction
-\subsection{Multi-factor Evaluating Model}
+\subsection{Risk Assessment: Bushfire Risk Model}
 % M1
-% 标题太长了 会改的
-% 原文后面还有一小段短语 for Segmentation and Assessment of the Topography
-In this section, we introduce a H3 and multi-factor evaluating model to data-orienting the topographic conditions of the state Victoria in Australia.
+Bushfire risk model measures the probability of catching bushfire for locations in Victoria.
+\subsubsection{Applying \textit{ijk} Coordinate System}
+%%% coordinate system
+To simplify the problem, we do hexagonal paving on the map.
+Each of the hexagon is 22.6 km in length.
+In addition, We consider the effective area of radio wave signals sent by UAVs to be a spherical area of 20 km radius. Each segment is evaluated from 4 perspectives:
+\begin{itemize}
+    \item Density of forest coverage,
+    \item Elevation,
+    \item Slope,
+    \item Fire history,
+\end{itemize}
 
-First, in order to simplify the question, we cover the state with hexagons in dense tiled layout. We consider that the valid zone of radio wave signal radiated by a UAV is a spherical area of radius 20 km, and the length of each side of hexagon is 1.22 km.
+The listed items above have impacts on two things:
+\begin{itemize}
+    \item The possibility of catching fire;
+    \item The propagation of radio wave signal.
+\end{itemize}
 
-Next, we evaluated each segment from 4 dimensions, which are: density of forest coverage, elevation, slope and fire history. We consider the influence of the listed dimensions from two aspects: how dose it influence the possibility to catch fire for the area and how does it influence the propagation of radio wave signal. The mechanism and significance of these factors are discussed below.
-
-\subsubsection{The Influence of Vegetation and Other Ground Facilities}
+\subsubsection{Vegetation and Other Ground Facilities}\label{BRM-model-vegetation}
 %%% M1F1
-According to Dissing and Verbyla (2003) \cite{Dorte-lightning01}, thermal circulations triggered by differential heating among distinct types of vegetation results in a higher probability for a lighting strike to occur. But according to a later research based in the State of Victoria (Kilinc and Beringer 2006 \cite{Musa-lightning02}), vegetation type and density in Southern region of Australia have little impact on the occurrence rate of lightning. Mainly because of the homogeneity of forests.
+According to Dissing and Verbyla (2003) \cite{Dorte-lightning01}, thermal circulations triggered by the heating difference among distinct types of vegetation results in a higher probability for a lightning strike to occur. However, a later research based in the State of Victoria (Kilinc and Beringer 2006) claims, that the type and the  density of vegetation in Southern Australia have little impact on the occurrence rate of lightning \cite{Musa-lightning02}. The major cause of lightning there is the homogeneity of forests.
 
-On the other hand, the leafage has a significant impact on the reflection behavior of radio wave, which plays an important part in the propagation process. Different researches have been done to estimate the decreasing rate of radio wave in varies situations, the shared mechanism underneath is Fresnel's Law. We divided the surroundings into three categories: forests, plain, cities, then we estimated the decrease factor and valid zone for the radio signal distinctively.
+Besides, the leafage has a significant impact on the reflection property of radio wave, which plays an important part in the propagation process.
+Several different researches have estimated the decreasing rate of radio wave in various situations. Basing on these results, we consider the state have three types of region: forests, plain, cities. Then we estimated the decreasing factor and valid zone for the radio signal distinctively.
 
-Since the given signal's frequency ranges from 300 megahertz to 3,000 megahertz and from 30 megahertz to 300 megahertz, which are considerably high, so it is difficult for the signal to steer by high-rise structures, including tall buildings and mountains. When our drones are passing through the plain area, the the energy lose for the signal strengths is in the air, so the radius of the valid zone for the signal reaches it's maximum of 20km. When the drone is passing a urban area, high obstacles diminished the zone and the radius reaches it's minimum of 5km. When the drones are flying or hovering in forest region, two situations should be discussed separately, the ground signal from wearable devices on front-line personnel and the aerial signal from another drone. According to the data of the experiments done by Y.S. Meng.et.al (2010) \cite{Ng-vhf-radio}, when the signal is launched in woods, the signal strength decreases linearly with the frequency of radio wave, and distance (Y. S. Meng.et.al 2009 \cite{Ng-vhfuhf-ieee}).
+Since the given signals' frequencies are considerably high, it is difficult for the signal to bypass the high-rise barriers like skyscrapers and mountains.
+When the drones are passing through the plain, energy loss is little, as the signal only passes through the atmosphere. Under this condition, the radius of the signal's valid zone reaches it's maximum of 20 km. However, high obstacles diminished the zone and the radius reaches it's minimum of 5 km when passing the urban areas. When flying or hovering in the forest regions, the ground signal from front-line personnel's devices and the aerial signal from other drones act differently. According to the experiments of Y.S. Meng.et.al (2010) \cite{Ng-vhf-radio}, when the signal is launched in woods, the signal strength decreases linearly with the frequency of radio wave, and distance (Y. S. Meng.et.al 2009 \cite{Ng-vhfuhf-ieee}).
 
-According to their model, the foliage loss in forest region is defined by the equation below:
+In the model of Meng's team, the foliage loss in forest region is defined by the equation below:
 \begin{equation}\label{ldb}
     L({\rm dB})\cong 0.48 f^{0.43} d^{0.13}
 \end{equation}
 
-Considering the drone-to-drone signal propagation, we simply omit the influence of trees, for it is reasonable for flying vehicles to stay above the forests. According to Meng, the background noise is around -75 dBm, so we consider the signal to be undetectable if its strength is lower than -70 dBm. Which means that when the strength loss is over 18 dB, we consider this point to be inaccessible. Using Equation \eqref{ldb} and the data we have, we can verify the decreasing coefficient for different area as follow:
+Considering the drone-to-drone signal propagation, we simply omit the influence of trees, for it is reasonable for flying vehicles to stay above the forests. According to Meng, the background noise is around -75 dBm, so the signal is considered to be undetectable if its strength is lower than -70 dBm. It indicates that when the strength loss is over 18 dB, the point would be regarded as an inaccessible point. Applying Equation \eqref{ldb} to the data we have, it could be verified that the decreasing coefficient for different area are as the equations below:
 \begin{equation}\label{omega-function}
     \overline{\omega}
     (x,y,z)=
@@ -357,16 +322,16 @@ Considering the drone-to-drone signal propagation, we simply omit the influence 
     \right.
 \end{equation}
 
-\subsubsection{The Influence of Elevation and Slope}
+\subsubsection{Elevation and Slope}
 %%% M1F2
-As we mentioned above, the Mountains would worsen the signal, thus, it is natural to introduce an elevation factor $A$ here to evaluate the impact of elevation on causing bushfires.
+As mentioned above, the Mountains often cause radio signal loss. Hence, it is natural to introduce an elevation factor $\alpha$ that can be used to evaluate the impact of elevation on causing bushfires.
 
-Annual lightning strikes were so connected to local elevation and slope that many scholars have been using topographic methods to predict bush-fire in mountainous regions \cite{Jiao-wildfire-cn}. Previous research has shown that strike density has a great leap while the local elevation reaches 800 meters and increases linearly with elevation \cite{Musa-lightning02}, and it is more likely for a mountainous area to form strikes comparing to an area with only one high-rise peak \cite{Jiao-wildfire-cn}.
+Lightning strikes were so related to local elevation and slope that many scholars have been using topographic methods to predict bushfires in mountainous areas \cite{Jiao-wildfire-cn}. Previous researches show that strike density has a great leap when the elevation reaches 800 meters, and then it increases linearly with elevation \cite{Musa-lightning02}. Besides, lightning strikes is more likely to formed in the mountainous areas, comparing to the areas with only one high-rise peak \cite{Jiao-wildfire-cn}.
 
 
-\subsubsection{The Influence of Fire History}
+\subsubsection{Fire History}
 %%% M1F3
-Burned area is more likely to be caught on fire in the future, according to Musa Kilinc and Jason Beringer \cite{Musa-lightning02}. Because ecological environment has been destroyed in the fire, which results in a low capability of local temperature and low capacity of water. None the less, the coked ground with dark shade will absorb more heat than green forests. All these traits formed a hot dry area which can be easily lighted by strikes.
+The burned areas tend to catch fires in the future, according to Musa Kilinc and Jason Beringer \cite{Musa-lightning02}. Because ecological environment has been destroyed in the fire, which results in a low capability of local temperature and low capacity of water. None the less, the coked ground with dark shade will absorb more heat than green forests. All these traits formed a hot dry area which can be easily lighted by strikes.
 
 \subsubsection{Functionizing the state of certain location}
 %%% M1-Function
@@ -375,28 +340,28 @@ To describe a certain location $(x,y,z)$ in the \textit{ijk} coordinate system, 
 The elevation of the location is denoted by $h(x,y,z)$ , while its slope is denoted by $Slope(x,y,z)$, which means the maximum slope around one point:
 \begin{equation}\label{slope}
     \begin{aligned}
-        Slope(x,y,z)&=\max\left\{
-            \frac{\lVert
-                    h(x,y,z)-h(x+m,y+n,z+k)
-                    \rVert}
-            {\lvert m\rvert+\lvert n\rvert+\lvert k\rvert}
-            \right\},\\
-            & m,n,k\in\{-1, 0, 1\},
-        \end{aligned}
-    \end{equation}
+        Slope(x,y,z) & =\max\left\{
+        \frac{\lVert
+            h(x,y,z)-h(x+m,y+n,z+k)
+            \rVert}
+        {\lvert m\rvert+\lvert n\rvert+\lvert k\rvert}
+        \right\},                            \\
+                     & m,n,k\in\{-1, 0, 1\},
+    \end{aligned}
+\end{equation}
 
 Besides, The unit of $h(x,y,z)$ and $Slope(x,y,z)$ are both meters.
 \\
 The weight of $Slope(x,y,z)$ in causing bushfires is
 \begin{equation}\label{weight of slope}
     \begin{aligned}
-        \beta(x,y,z)&=\gamma\cdot \max\left\{
-            \frac{
-                Slope(x,y,z)-Slope(x+m,y+n,z+k)
-                }
-            {\lvert m\rvert+\lvert n\rvert+\lvert k\rvert}
-            \right\},\\
-            &\gamma\text{ is a constant, and } m,n,k\in\{-1, 0, 1\},
+        \beta(x,y,z) & =\gamma\cdot \max\left\{
+        \frac{
+            Slope(x,y,z)-Slope(x+m,y+n,z+k)
+        }
+        {\lvert m\rvert+\lvert n\rvert+\lvert k\rvert}
+        \right\},                                                              \\
+                     & \gamma\text{ is a constant, and } m,n,k\in\{-1, 0, 1\},
     \end{aligned}
 \end{equation}
 
@@ -424,15 +389,15 @@ Here $f_i$ is the amount of fire cases in the $n-i$-th year.
 Then we define a function $V(x,y,z)$ to represent how possible a point will catch fire. It is defined below :
 \begin{equation}\label{PossibilityFire}
     \begin{aligned}
-        V(x,y,z) =& V_1(x,y,z)\cdot V_2(x,y,z), \\
-        \text{Note: }\qquad V_1(x,y,z) &= [
-            0.58 F(x,y,z)\\
-           & +\alpha\left(
-                h(x,y,z)-800
-                 \right)\cdot
-                 \beta\cdot u(h(x,y,z)-800)
-            ], \\
-        V_2(x,y,z) &=\left[
+        V(x,y,z) =                     & V_1(x,y,z)\cdot V_2(x,y,z), \\
+        \text{Note: }\qquad V_1(x,y,z) & = [
+        0.58 F(x,y,z)                                                \\
+                                       & +\alpha\left(
+        h(x,y,z)-800
+        \right)\cdot
+        \beta\cdot u(h(x,y,z)-800)
+        ],                                                           \\
+        V_2(x,y,z)                     & =\left[
             1+\frac{\ln \left(1+S\left(x,y,z\right)\right)}{3}
             \right],
     \end{aligned}
@@ -443,7 +408,7 @@ here $u(\delta)$ is the stair function:
     u(\delta)=
     \left\{
     \begin{aligned}
-         & 1,\qquad \delta> 0,\\
+         & 1,\qquad \delta> 0,    \\
          & 0,\qquad \delta\leq 0.
     \end{aligned}
     \right.
@@ -451,23 +416,25 @@ here $u(\delta)$ is the stair function:
 
 \subsubsection{Future situation in a decade}
 %%% M1-Predict
-To predict the changing situation in the next decades, we reevaluate the area in the future with the multi-factor model above. Since we do not take extreme events into consideration (severe war, earthquake, tsunami, meteorolite, EI Nino etc.), the landscape and urban constructions will not change much in the next decade.
+To predict the changing situation in the next decade, we reevaluate the area in the future with the model above.
+
+Since we do not take extreme events into consideration (severe war, earthquake, tsunami, meteorolite, EI Nino etc.), the landscape and urban constructions will not change much in the next decade.
 
 The only changing factor is the fire history, which was evaluated by Equation \ref{Fire-history}. When assessing the situation in the future, $V(x,y,z)$ should be the possibility of catching bushfires on that year instead. For instance, if $V(x,y,z)>867.35$ holds for sometime in the next decades, it means the possibility of catching bushfires is 95\% .
 
-
-\subsection{Use Nervous System Model to find the best arrangement of UAVs}
+\subsection{UAV Arrangement: Nervous System Model}
 % M2
-Widespread bushfires in Australia are usually preceded by strong winds, a small-scale burning forests can evolve into destructive fires. So in other to minimize the damage caused by bushfires, it is reasonable to build up a monitoring and alarming system to supervise the region before any outbreaks. In this section, our group build up a model imitating the nervous system to sort out the best arrangement of UAVs.
+Widespread bushfires in Southeastern Australia are usually preceded by strong winds, a small-scale burning forests can evolve into destructive fires. To minimize such damage, we feel obliged to set a bushfire monitoring and alarming system. In this section, we would introduce a model imitating the nervous system. This model is aiming to figure out the best arrangement of UAVs.
 
-In our model, drones with thermal imaging cameras and telemetry sensors (drone \uppercase\expandafter{\romannumeral1}) are send out to petrol around the state, detecting fire outbreaks and sending back images, they are working as sensors of a nervous system. While drones with radio repeaters (drone \uppercase\expandafter{\romannumeral2}) act like ganglion, they receive signals and send them out immediately, the command center is the brain in this system. Our goal is achieved by two steps. First, find the best routes for drones\uppercase\expandafter{\romannumeral1}. In order to react to fire out breaks timely, the monitoring system should
+In our model, drones with thermal imaging cameras and telemetry sensors (denoted as drone \uppercase\expandafter{\romannumeral1}) are send out to petrol around the state, detecting fire outbreaks and sending back images. they are working as sensors of the nervous system. Correspondingly, the drones with radio repeaters (denoted as drone \uppercase\expandafter{\romannumeral2}) act as the ganglion, they receive signals and send them out immediately, the command center is the brain in this system.
 
+Our goal is reached by two steps. The first is to find the best routes for drones\uppercase\expandafter{\romannumeral1}. The following two items can help the monitoring and alarming system react to fire outbreaks in time:
 \begin{itemize}
-    \item Cover the state with its valid zone,
-    \item Pay closer attention to the points who have higher probability of catching fire.
+    \item The whole state is within the monitoring system's valid zone;
+    \item The places that are more probable to catch fire should be paid more attention to.
 \end{itemize}
 
-To further the discussion, we have two new functions: first for signal strength, and second for average signal density of one point:
+To further the discussion, two new functions was introduced: first for signal strength, denoted as $Str(i,x,y,z,t)$, and second for average signal density of one point, denoted as $E(x,y,z,t)$:
 % equ. 19, 20
 \begin{subequations}
     \begin{equation}
@@ -478,34 +445,32 @@ To further the discussion, we have two new functions: first for signal strength,
     \end{equation}
 \end{subequations}
 
-From the discussion in section 1, we construct the function \label{PossibilityFire} to evaluate how high the possibility is for a point to catch fire, and here we introduce a function $Judge(x, y,z)$ defined as $Judge(x,y,z)=\frac{\eta \cdot E}{V}-1$ to judge whether a point is safe enough, by safe enough we mean the possibility for any drone \uppercase\expandafter{\romannumeral1} to discover a outbreak immediately is high. Here we set the threshold to be 80 percent, thus $\lambda_{\text{safe}}=0.8$.
+In the former discussion, we construct the function \label{PossibilityFire} to evaluate how high the possibility is for a point to catch fire. Here, similarly, we introduce a function $Judge(x, y,z)$ defined as $Judge(x,y,z)=\frac{\eta \cdot E}{V}-1$ to judge whether a point is \textit{safe enough}. By \textit{safe enough} we mean: for any drone \uppercase\expandafter{\romannumeral1}, the possibility to discover a bushfire outbreak immediately is high. Here we set the threshold to be 80\%, i.e. $\lambda_{\text{safe}}=0.8$.
 
-Second, we should link the sensors to the brain. As discussed in the section 1, we omit the signal loss caused by forests, but we take the influence of high buildings into consideration. So here we define two kinds of vectors $D_i(t)=[d_{ij}(t)]$ and $Q_j(t)=[b_{jk}(t)]$  to represent the signal path from sensors to the center. The vectors are defined as below:
-
+Then we are going to link the two types of drones, as in the nervous system the sensors should be linked to the brain. Follow what we mentioned in previous sections, we omit the signal loss caused by forests. However, we would take the influence of high buildings into consideration. And here we define two kinds of vectors $D_i(t)=[d_{ij}(t)]$ and $Q_j(t)=[b_{jk}(t)]$ to represent the signal paths from sensors to the center. The vectors are defined as below:
 %equ 16
 \begin{subequations}
     \begin{equation}
         d_{ij}(t)=\left\{
-            \begin{aligned}
-                &1, \quad \text{if } 0< \lVert M(i,t)-R(j,t)\rVert< 8,\\
-                &0,\quad \text{otherwise},
-            \end{aligned}
+        \begin{aligned}
+             & 1, \quad \text{if } 0< \lVert M(i,t)-R(j,t)\rVert< 8, \\
+             & 0,\quad \text{otherwise},
+        \end{aligned}
         \right.
     \end{equation}
     \begin{equation}
         b_{jk}(t)=\left\{
-            \begin{aligned}
-                &1, \quad \text{if } 0< \lVert R(k,t)-R(j,t)\rVert< 8,\\
-                &0,\quad \text{otherwise},
-            \end{aligned}
+        \begin{aligned}
+             & 1, \quad \text{if } 0< \lVert R(k,t)-R(j,t)\rVert< 8, \\
+             & 0,\quad \text{otherwise},
+        \end{aligned}
         \right.
     \end{equation}
 \end{subequations}
 
- Here $i$ denotes the number of drone \uppercase\expandafter{\romannumeral1}s, while $j$ and $k$ denote the number of drone \uppercase\expandafter{\romannumeral2}s.
+Here $i$ denotes the number of drone \uppercase\expandafter{\romannumeral1}s, while $j$ and $k$ denote the number of drone \uppercase\expandafter{\romannumeral2}s.
 
-To guarantee that the command center can react to any out break in time, the signal paths should keep unimpeded at all time, then the variables are limited by the following inequality constraints under this requirement.
-
+To ensure that the command center can react to any outbreaks in time, the signal paths should keep unimpeded at all time. Therefore, the variables are limited by the following inequality constraints:
 %equ.17
 \begin{subequations}
     \begin{equation}
@@ -514,100 +479,71 @@ To guarantee that the command center can react to any out break in time, the sig
     \begin{equation}
         \sum_{k=1}^{N_{\text{rep}}}b_{jk}\left\{
         \begin{aligned}
-            \geq 1,& \qquad \text{if }\sum_{i=1}^{N_{\text{SSA}}} d_{ij}\geq 1,\\
-            \geq 2,& \qquad \text{otherwise},
+            \geq 1, & \qquad \text{if }\sum_{i=1}^{N_{\text{SSA}}} d_{ij}\geq 1, \\
+            \geq 2, & \qquad \text{otherwise},
         \end{aligned}
         \right.
     \end{equation}
 \end{subequations}
 
-One last thing should be considered in this section, which is the recycle of drones. Under assumption 9 (see section \ref{ampt09}), none of our drones would be allowed to go further than the distance they can get back to charging stations before they run out of buttery. This give the constraints below.
-
+The last factor considered in this section is the charging strategy of drones. Under assumption 9 (see section \ref{ampt09}), none of our drones would be allowed to go further than the distance they can get back to charging stations before they run out of buttery. These ideas triggered the constraints below:
 % equ. 18
 \begin{subequations}
     \begin{equation}
         t_{\text{hov}}+t_{\text{fly}}=t-105n,
     \end{equation}
     \begin{equation*}
-            \text{Denotion:    }
-            k(n, t_{\text{fly}}, t_{\text{hov}}) = n\cdot Br-PF\cdot t_{\text{fly}}-PH\cdot t_{\text{hov}},
+        \text{Denotion:    }
+        k(n, t_{\text{fly}}, t_{\text{hov}}) = n\cdot Br-PF\cdot t_{\text{fly}}-PH\cdot t_{\text{hov}},
     \end{equation*}
     \begin{equation}
-    \begin{aligned}
-        \qquad\qquad & k(n, t_{\text{fly}}, t_{\text{hov}})
-        \geq\frac{\min\left\{\lVert
+        \begin{aligned}
+            \qquad\qquad & k(n, t_{\text{fly}}, t_{\text{hov}})
+            \geq\frac{\min\left\{\lVert
                 M(i,t)-Chg(q)
-            \rVert ,q
-            \right\}}{
+                \rVert ,q
+                \right\}}{
                 0.417\cdot V_{\text{max}}
-                },
-        \ \forall t\forall i,\\
-        & k(n, t_{\text{fly}}, t_{\text{hov}})
-        \geq\frac{\min\left\{\lVert
+            },
+            \ \forall t\forall i,                               \\
+                         & k(n, t_{\text{fly}}, t_{\text{hov}})
+            \geq\frac{\min\left\{\lVert
                 R(j,t)-Chg(q)
-            \rVert ,q
-            \right\}}{
+                \rVert ,q
+                \right\}}{
                 0.417\cdot V_{\text{max}}
-                },
-        \ \forall t\forall j,
-    \end{aligned}
+            },
+            \ \forall t\forall j,
+        \end{aligned}
     \end{equation}
 \end{subequations}
 
 Here $0.417$ is the transformation coefficient between real velocity and grid velocity, and $n$ shows how many times that $i$-th drone went back to any charging station.
 
-
-\subsection{Model for Rapid Bushfire Response}
-% M3
-Once any fire is spotted, command center will respond to the situation immediately, making sure that the communication network build up by UAVs will available in as possible a short time as possible. As discussed in section 1, the signal from forward teams will be weaken by vegetation and elevation. So here we should reconsider the signal strength around the fire,
-
-%equ.21
-\begin{equation}
-    Str^{\prime}(i,x,y,z,t)
-    =u\cdot\left[
-            \overline{\omega}\cdot 8
-            -\lVert
-                (x,y,z)-M(i,t)
-            \rVert
-        \right]
-\end{equation}
-
-then we recalculate the average signal density of one point depending on time,
-
-%{equ.22}
-\begin{equation}
-    E(x,y,z,N,t)=\sum_{i=1}^{N_{\text{SSA}}}\frac{1}{T}\int_{0}^{T}S(i,x,y,z,\tau)d\tau,
-\end{equation}
-
-when the new signal density surpass the threshold we set, we regard this point to be accessible and hover the drones to hold the signal. The time interval between the moment fires have been spotted and the time the communication network has been build is the reacting time, and we want it to be as short as possible. Under these assumptions we can find out an efficient way to re-construct the distribution of drones.
-
 % M4
-\subsection{Model for Hovering Drones for Fires of Different Sizes on Different Terrains}
-In the first model, we evaluated each hexagons from 4 aspects, and in the third model we considered the decreasing rate in different terrains, so in this model we combine this two models to sort out the best hovering positions for fires of different sizes on different terrains.
+\subsection{Generalization: Drone-Terrain Model}
+In the first model, we evaluated the hexagonal segments of region from 4 aspects; In the second model we considered the decreasing rate in different terrains. Now, in this model, it was high time to combine the former two models. In this section, our goal is to figure out the best hovering positions for monitoring fires of different sizes on different terrains.
 
-It is reasonable for us to assume that the forward teams will never go inside a burning forest, so the valid zone of radio signal only need to cover the premier of any fires. Since we want to keep the drones static to hold the signal path, and at the same time, we need them to come back when they are running out of buttery, so we arrange the drones as below:
-
+It is reasonable to assume that the front-line staff teams would never enter a burning forest, thus, the valid zone of radio signal need to cover only the frontier of any fires. A tricky way to maintain the signal path is to keep the drones static. Meanwhile, the drones need to come back when nearly running out of battery. Therefore, in this model, arranging the drones as below might work well:
 \begin{itemize}
-    \item We need drone \uppercase\expandafter{\romannumeral2}s to keep in touch with the front teams;
-   \item We need drone \uppercase\expandafter{\romannumeral1}s to monitor and report data from wearable devices on front-line personnel;
-    \item As long as there is a fire spotted, except the drones needed to build the communication net, other drones will go back to charge stations to stand by.
+    \item Drone \uppercase\expandafter{\romannumeral2}s are supposed too keep in touch with the front-line teams;
+    \item Drone \uppercase\expandafter{\romannumeral1}s are supposed to monitor and report data from front-line personnel's wearable devices;
+    \item All the drones will return to the charging stations as long as any fire spotted, except the ones that are components of the communication network.
 \end{itemize}
 
-To satisfy these requirements we again recalculate the signal strength average signal density as below,
-
+To satisfy these requirements, we re-calculate the signal strength average signal density as below:
 %{equ.23}
 \begin{equation}
     Str_{\chi}(i,x,y,z)
     =u\cdot\left[
-            \overline{\omega}\cdot 8
-            -\lVert
-                (x,y,z)-M(i)
-            \rVert
+        \overline{\omega}\cdot 8
+        -\lVert
+        (x,y,z)-M(i)
+        \rVert
         \right],
     \chi=\text{\small\uppercase\expandafter{\romannumeral1}}\text{\small ,}
     \text{\small\uppercase\expandafter{\romannumeral2}}\text{\small ,}
 \end{equation}
-
 
 %{equ.24}
 \begin{equation}
@@ -619,90 +555,207 @@ To satisfy these requirements we again recalculate the signal strength average s
     \text{\small\uppercase\expandafter{\romannumeral2}},
 \end{equation}
 
-because the drones are now static, the signal now is a constant as time changes.
+The signal now is a constant as time changes, for the drones are now static.
 
-We also need the forward drones to be connected to the command center. This restriction is described by the formulas below.
-
+We also require that the front-line drones be connected to the command center. This is described by the constraints below:
 %equ 16.17
 % 16
 \begin{subequations}
     \begin{equation}
         d_{ij}(t)=\left\{
-            \begin{aligned}
-                &1, \quad \text{if } 0< \lVert M(i,t)-R(j,t)\rVert< 8,\\
-                &0,\quad \text{otherwise},
-            \end{aligned}
+        \begin{aligned}
+             & 1, \quad \text{if } 0< \lVert M(i,t)-R(j,t)\rVert< 8, \\
+             & 0,\quad \text{otherwise},
+        \end{aligned}
         \right.
     \end{equation}
     \begin{equation}
         b_{jk}(t)=\left\{
-            \begin{aligned}
-                &1, \quad \text{if } 0< \lVert R(k,t)-R(j,t)\rVert< 8,\\
-                &0,\quad \text{otherwise},
-            \end{aligned}
+        \begin{aligned}
+             & 1, \quad \text{if } 0< \lVert R(k,t)-R(j,t)\rVert< 8, \\
+             & 0,\quad \text{otherwise},
+        \end{aligned}
         \right.
     \end{equation}
-% 17
+    % 17
     \begin{equation}
         \sum_{j=1}^{N_{\text{rep}}}d_{ij}\geq 1, \quad i=1,2,\cdots,N_{\text{SSA}}
     \end{equation}
     \begin{equation}
         \sum_{k=1}^{N_{\text{rep}}}b_{jk}\left\{
         \begin{aligned}
-            \geq 1,& \qquad \text{if }\sum_{i=1}^{N_{\text{SSA}}} d_{ij}\geq 1,\\
-            \geq 2,& \qquad \text{otherwise},
+            \geq 1, & \qquad \text{if }\sum_{i=1}^{N_{\text{SSA}}} d_{ij}\geq 1, \\
+            \geq 2, & \qquad \text{otherwise},
         \end{aligned}
         \right.
     \end{equation}
 \end{subequations}
 
-
-\section{Model Simulation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Model Simulation
-
-
-\subsection{Nervous System model for UAVs Monitoring System}
-% S1
-
-
-\subsubsection{Adapting for Future}
-% 这里有点奇怪
-
-
-\subsection{Modeling for Rapid Bushfire Response}
-% S2
-
-
-\subsection{Model for the hovering drones SSA and Radio Repeater}
-% S3
-
-
 \section{Sensitive Analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Sensitive Analysis
-\subsection{ensitivity of parameters}
-abaaba
-\subsection{Robusticity of the models}
+\subsection{Sensitivity of parameters}
+To construct the above models, several constant parameters were used. Their values are given by us and now listed in the table below.
+% tab 1
+\begin{table}[h]\label{paratab}
+    \centering
+    \caption{Parameters and Their Values}
+    \vspace{3pt}
+    \begin{tabular}{>{\centering\arraybackslash}p{6em}>{\centering\arraybackslash}p{30em}}
+        \toprule % 绘制第1条线
+        Parameter           & Value                \\
+        \midrule % 绘制第2条线
+        $\overline{\omega}$ & $0.25/ 0.5/ 1$       \\
+        $\gamma$            & $0.58$               \\
+        $\epsilon$          & $0.5$                \\
+        $\alpha$            & $8.68\times 10^{-6}$ \\
+        $\eta$              & $2.35$               \\
+        $PF$                & $1.2$                \\
+        $PH$                & $1.5$                \\
+        \bottomrule % 绘制第3条线
+    \end{tabular}
+\end{table}
 
-\section{Strength and Weakness}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Strength and Weakness
-\subsection{Strength}
+While other parameters are set based on formal experiments and researches, the index $\epsilon$ is artificially given. So here we want to analyze the reliance of our model on the value of $\epsilon$, we use the amount of drones needed to represent the behaviour of models, the results are listed below.
 
+% tab 2
+\begin{table}[h]
+    \centering
+    \caption{The Model's Reliance to the Parameter}
+    \vspace{3pt}
+    \begin{tabular}{>{\centering\arraybackslash}p{6em}>{\centering\arraybackslash}p{30em}}
+        \toprule % 绘制第1条线
+        Parameter      & Value{\small
+        After rounding}               \\
+        \midrule % 绘制第2条线
+        $\epsilon=0.3$ & $N=36+96$    \\
+        $\epsilon=0.5$ & $N=36+96$    \\
+        $\epsilon=0.7$ & $N=37+100$   \\
+        \bottomrule % 绘制第3条线
+    \end{tabular}
+\end{table}
 
-\subsection{Weakness}
-
+From the table above, we can see that the simulation results of the model have little reliance on the value of $\epsilon$, which means that our model is valid and our conclusion is reasonable.
 
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Conclusion
-We build a.....interesting findings:
+%% Result and Conclusion
+%简单描述总结以上模型的模拟结果。
+The Bushfire Risk Model was first introduced to quantitize and label the terrain of Victoria with the special \textit{ijk} coordinate system. Then the possibility for any place to catch fire was evaluated, and the future situation was predicted.
 
+Based on the Nervous System Model and safety evaluation principles in Section \ref{BRM-model-vegetation}, the optimal arrangement was attained. According to the program simulation, the best choice is to use \textbf{36 SSAs and 96 Repeaters}.
+
+When fires are spotted by the monitoring system, UAVs will be directed as follow:
 \begin{itemize}
-    \item aaaaaaa
-    \item aaaaaaa
+    \item Drones with SSA that are close to the fire will be sent immediately to keep the area on fire covered by signal.
+    \item Drones with repeaters will form the communication web.
+    \item Except the necessary drones, other drones will be send back to charge and stand by.
 \end{itemize}
+
+Besides, The optimal positions of hover drones are depending on different regions. In our research, three locations are taken into consideration, which is Harieteville (forests of high elevation), Melbourne (urban area), and a place between Omeo and Orbost (plain). The hovering positions are shown in the graphs below.
+%{gra.1} {gra.2} {gra.3}
+\begin {figure}[h]
+\centering % 居中显示
+\includegraphics[scale=0.41]{forest.png}
+\caption{Forests of Elevation $> 800$ meters} % 标题
+\end {figure}
+
+\begin {figure}[h]
+\centering % 居中显示
+\includegraphics[scale=0.45]{urban.png}
+\caption{Urban Area} % 标题
+\end {figure}
+
+\begin {figure}[h]
+\centering % 居中显示
+\includegraphics[scale=0.45]{plain.png}
+\caption{Plain Area} % 标题
+\end {figure}
+\clearpage
+The changing likelihood of fire events over the next decade in our model was partly illustrated below:
+
+%{gra4},{gra5},
+\begin {figure}[h]
+\centering % 居中显示
+\includegraphics[scale=0.4]{2021.png}
+\caption{Condition at 2020} % 标题
+\end {figure}
+
+%{gra4},{gra5},
+\begin {figure}[h]
+\centering % 居中显示
+\includegraphics[scale=0.4]{2031.png}
+\caption{Condition at 2030} % 标题
+\end {figure}
+
+We predict that if the likelihood for huge fires rise the cost on radio repeaters and thermal cameras will rise since they will be put into a hot environment constantly, which rise their risk of breaking. Electricity bills and labour cost will rise, because more people is needed to direct the drones system and drones should charge more frequently.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%Budget Request页%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\section*{\centering \textbf{Budget Request}}\addcontentsline{toc}{section}{Budget Request}
+% 开始写 budget request
+\vspace{10pt}
+% 基本信息
+\begin{flushleft}
+    {\small
+    \noindent \textsc{Project Name}: Equipment Procurement for Rapid Bushfire Response
+    \\ \noindent \textsc{Date Submitted}: February 8th, 2021}
+\end{flushleft}
+\vspace{10pt}
+%\hrule
+% explanation
+This Budget Proposal provides necessary costs associated with the above named project (the "Equipment Procurement for Rapid") which we would like to pursue . Costs for the Project have been itemized in this Budget Proposal below and justification has been provided for each cost element. Should you have any questions related to this Budget Proposal, please do not hesitate to contact the undersigned.
+% request正文
+\paragraph{PROJECT DESCRIPTION\\} The state of Victoria has a long history of bushfires, which causing life loss and property damage of varying sizes every year. In the recent years, with advances in technology, we have the opportunity to further reduce the impact of bushfires in Victoria. To better protect lives, interests, and the ecosystem of the state, a new division of \textbf{CFA}, named as \textsc{Rapid Bushfire Response}, would be intended to found, which would aiming at responding quickly to bushfires.
+
+\paragraph{PROJECT PURPOSE\\} In order to equip the proposed new division, it was necessary to build a effective and sensitive monitoring system for bushfires, which could strongly assist the front-line personnel in the daily work of bushfires management. Thus, \textbf{CFA} need the budget to purchase SSA drones and Radio Repeater drones for the monitoring.
+
+\paragraph{COST ELEMENT AND SUMMARY\\}
+The following are necessary cost elements of the Project:
+\begin{table*}
+    \centering
+    \begin{tabular}{>{\centering\arraybackslash}p{6em}>{\centering\arraybackslash}p{5em}>{\centering\arraybackslash}p{5em}>{\centering\arraybackslash}p{7em}}
+        \toprule
+        \textsc{Item Name}
+                    & \textsc{Quantity}
+                    & \textsc{Unit Price}
+                    & \textsc{Extended Price}
+        \\ \midrule
+        UVA(s)      & $40$                    & $\$ 1, 000$ & $\$ 40, 000$  \\
+        Repeater(s) & $100$                   & $\$ 1, 000$ & $\$ 100, 000$ \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+\begin{table*}[h]
+    \centering
+    \caption{The Model's Reliance to the Parameter}
+    \vspace{3pt}
+    \begin{tabular}{>{\centering\arraybackslash}p{15em}>{\centering\arraybackslash}p{20em}}
+        \toprule % 绘制第1条线
+        \textsc{Item Name}                  & \textsc{Total Estimated Cost} \\
+        \midrule % 绘制第2条线
+        Drones {\small (including 2 types)} & $140, 000$                    \\
+        \bottomrule % 绘制第3条线
+    \end{tabular}
+\end{table*}
+
+\begin{flushleft}
+    \fontsize{12pt}{10pt} % [font size][line space]
+    \selectfont
+    \indent This budget was developed by \textbf{CFA} of Victoria with adequate modeling that supported this estimate. By the signature below,  we hereby certify that this Budget Proposal reflects the best estimate of the true and necessary costs for the Project, and the information provided herein is accurate, complete and current as of the date of the signature below.
+\end{flushleft}
+
+% 清理页眉页脚
+\thispagestyle{empty}
+% 落款
+\vspace{10pt}
+\begin{flushleft}
+    Country Fire Authority, VIC Australia\\
+    {[First Name][Last Name]}\\
+    {[Titile]}
+\end{flushleft}
 
 \newpage
 \section*{References}\addcontentsline{toc}{section}{References}
@@ -714,14 +767,5 @@ We build a.....interesting findings:
 \bibliography{books}
 \Large
 \bibliographystyle{IEEEtran}
-\newpage
-
-\section*{Appendices}\addcontentsline{toc}{section}{Appendices for Code and Data}
-%%%%%%%%%%%%%%%%%%%%%%%%%%附录%%%%%%%%%%%%%%%%%%%%%%%%%%
-\fontsize{13pt}{12.5pt}\selectfont
-foooo
-\vspace{7pt}
-\subsection*{Appendices A}
-fooooo
 
 \end{document}
