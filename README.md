@@ -10,4 +10,7 @@ This folder contains the summary and article.
 .pdf = exported document
 ```
 
-## `prj/`
+## `prj_*/`
+
+Project code using `*` (API or package) as main method.
+
