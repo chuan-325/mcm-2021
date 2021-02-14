@@ -1,3 +1,11 @@
+# This file is the final step of our project and generates maps of the
+# specified format. To modify the format of choropleth map, `map_type`
+# can be replaced by "heat-1" (heat map of the first question), "heat-3"
+# (heat map of the third question), "elevation" (elevation map of Victoria),
+# or None (all h3 hexagons will be the same color). Make sure you have
+# produce the necessary csv files first, including `victoria.geojson`,
+# `s_value.csv`, `forest.csv`, `elevation.csv`, and `hex.csv`
+
 import h3
 from geojson.feature import *
 import geopandas as gpd
@@ -7,29 +15,22 @@ import folium
 import branca.colormap as cm
 import json
 import pandas as pd
+import sys
 
 input_dir = "../dataset/"
 output_dir = "../output/"
 
 
 def load_and_prepare_gdf(filepath):
+    """Prepare the list of boundary locations for drawing the boundary line"""
     gdf = gpd.read_file(filepath, driver="GeoJSON")
-    gdf.head()
     gdf["geom_geojson"] = gdf["geometry"].apply(lambda x: geometry.mapping(x))
     return gdf
 
 
-def calculate_u(h):
-    if h <= 800.0:
-        return 0.0
-    else:
-        res = (h - 800.0) * 0.00000868
-        return res
-
-
 def base_empty_map():
     """Prepares a folium map centered in a central GPS point of Victoria"""
-    m = Map(location=[-37.813889, 144.963056],
+    m = Map(location=[-37.813889, 144.963056],  # The location of Melbourne
             zoom_start=10,
             tiles="cartodbpositron",
             attr='''© <a href="http://www.openstreetmap.org/copyright">
@@ -42,7 +43,7 @@ def base_empty_map():
 
 def plot_basemap_region_fill(df_boundaries_zones, initial_map=None):
     """On a folium map, add the boundaries of the geometries in geojson formatted
-       column of df_boundaries_zones"""
+    column of df_boundaries zones"""
 
     if initial_map is None:
         initial_map = base_empty_map()
@@ -95,25 +96,39 @@ def hexagons_dataframe_to_geojson(df_hex, hex_id_field,
     return geojson_result
 
 
+def calculate_u(h):
+    """Calculate the value of U in our project. If the elevation is lower than 800 meter, U will be zero"""
+    if h <= 800.0:
+        return 0.0
+    else:
+        res = (h - 800.0) * 0.00000868
+        return res
+
+
 def generate_s_value():
+    """Load the value of S in our project, which has already been calculated by other files."""
     df_s = pd.read_csv(output_dir + "csv/s_value.csv")
     return df_s
 
 
 def generate_f_value():
+    """Load the forest data. The value of F in forest areas is 0.58 while in other areas is 0."""
     gdf_raw = pd.read_csv(output_dir + "csv/forest.csv")
     gdf_raw["F_value"] = 0.58
     return gdf_raw
 
 
 def generate_value(df_hex, mode):
+    """Generate the value column according to the mode of map. Heat-x means
+    the heat map of ur final result; elevation means the elevation map of
+    Victoria; others mean a map showing how the h3 hexagon is divided"""
     df_ele = pd.read_csv(output_dir + "csv/elevation.csv")
     df_hex = pd.merge(df_hex, df_ele, on="hex_id")
     if mode == "heat-1" or mode == "heat-3":
         s_value = generate_s_value()
-        df_hex = pd.merge(df_hex, s_value, on="hex_id", how="left")
+        df_hex = pd.merge(df_hex, s_value, on="hex_id", how="left")  # The merge function can filter data in Victoria
         f_value = generate_f_value()
-        df_hex = pd.merge(df_hex, f_value, on="hex_id", how="left")
+        df_hex = pd.merge(df_hex, f_value, on="hex_id", how="left")  # The merge function can filter data in Victoria
         df_hex.fillna(0, inplace=True)
         if mode == "heat-1":
             df_hex["value"] = df_hex.apply(lambda x: x["S_value"] * x["F_value"], axis=1)
@@ -130,7 +145,6 @@ def generate_value(df_hex, mode):
     else:
         df_hex["value"] = 1
     df_valued = df_hex[["hex_id", "value"]]
-    # print(df_hex)
     return df_valued
 
 
@@ -138,7 +152,7 @@ def choropleth_map(df_aggreg, hex_id_field, geometry_field, value_field,
                    layer_name, initial_map=None, kind="filled_nulls",
                    border_color='#ffffff', fill_opacity=0.4,
                    border_opacity=0.3, with_legend=False):
-    """Plots a choropleth map with folium"""
+    """Plots a Choropleth Map with folium"""
 
     if initial_map is None:
         initial_map = base_empty_map()
@@ -190,6 +204,7 @@ def choropleth_map(df_aggreg, hex_id_field, geometry_field, value_field,
 
 
 def set_range_plain(original_map, color):
+    """Draw circles on plain area with a radius of 20 km"""
     center_list = [(-37.362157, 148.579852), (-37.190834, 148.232456), (-37.458542, 148.190546),
                    (-37.382846, 147.752364), (-37.640824, 148.026425)]
     for center in center_list:
@@ -202,6 +217,7 @@ def set_range_plain(original_map, color):
 
 
 def set_range_forest(original_map, color):
+    """Draw circles on forest area with a radius of 10 km"""
     center_list = [(-36.722421, 146.777949), (-36.888024, 147.523976), (-36.892515, 147.124482),
                    (-36.910543, 147.316754), (-36.759834, 147.259824), (-37.044143, 147.202352),
                    (-36.783415, 147.400954), (-37.041345, 147.025425), (-37.173534, 147.159656),
@@ -216,6 +232,7 @@ def set_range_forest(original_map, color):
 
 
 def set_range_urban(original_map, color):
+    """Draw circles on urban area with a radius of 5 km"""
     center_list = [(-37.730532, 145.096356), (-37.664546, 145.089435)]
     for center in center_list:
         folium.Circle(location=center,
@@ -227,7 +244,9 @@ def set_range_urban(original_map, color):
 
 
 if __name__ == '__main__':
-    map_type = "heat-3"
+    map_type = None
+    if len(sys.argv) > 1:
+        map_type = sys.argv[1]
     output_file = output_dir + "html/" + map_type + ".html"
     color_plain = "c295ff"
     color_forest = "a464fc"
@@ -238,9 +257,11 @@ if __name__ == '__main__':
 
     hex_df = pd.read_csv(output_dir + "csv/hex.csv")
     hex_df = generate_value(df_hex=hex_df, mode=map_type)
+
+    # Save the value list in a csv file
     sorted_df = hex_df.sort_values(by="value", ascending=False).reset_index(drop=True)
     sorted_df.to_csv(output_dir + "csv/valued.csv", index=False)
-    print(sorted_df["value"].sum())
+
     hex_df["geometry"] = hex_df["hex_id"].apply(
         lambda x: {"type": "Polygon",
                    "coordinates":

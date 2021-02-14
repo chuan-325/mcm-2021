@@ -21,6 +21,18 @@ When you're currently under the directory `prj_h3`, you can setup the necessary 
 conda env create -f env/environment.yaml
 ```
 
-## Execution Tips
+## Execution Process
 
-Remain to complete ...
+``` shell script
+conda activate mcm2021
+cd source/
+python gen_hex_list.py victoria
+python gen_req.py    # check your Google Map API key first
+bash send_req.sh    # in unix environment
+python gen_elevation_from_json.py    # check each line of command has been executed before this step
+python gen_beta.py
+python gen_geojson_form_tiff.py
+python gen_hex_list.py forest
+python gen_s_value.py
+python gen_html.py    # available parameters: heat-1; heat-3; elevation
+```

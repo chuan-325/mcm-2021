@@ -1,3 +1,6 @@
+# This file accepts two inputs only: `forest` and `victoria`. Make sure the geojson file exists first.
+# The corresponding geojson file will be converted into a column of h3 hexagons and saved.
+
 import h3
 import geopandas as gpd
 from shapely import geometry, ops
@@ -5,12 +8,12 @@ import pandas as pd
 import sys
 
 input_dir = "../dataset/"
-output_dir = "../output/csv"
+output_dir = "../output/csv/"
 
 
 def load_and_prepare_gdf(filepath):
-    """Loads a geojson files of polygon geometries and features,
-    swaps the latitude and longitude andstores geojson"""
+    """Loads a geojson file of polygon geometries and features as a dataframe,
+    swaps the latitude and longitude and stores the geojson format"""
     gdf = gpd.read_file(filepath, driver="GeoJSON")
     gdf.head()
     gdf["geom_geojson"] = gdf["geometry"].apply(lambda x: geometry.mapping(x))
@@ -21,6 +24,8 @@ def load_and_prepare_gdf(filepath):
 
 
 def fill_hexagons(geom_geojson, res, flag_swap=False, flag_return_df=False):
+    """Fill the input polygons with h3 hexagons. The result of each polygon is stored in a single dataframe item.
+    Note: Each time you execute this function, the set of hexagons is the same, but the sequence order is different."""
     set_hexagons = h3.polyfill(geojson=geom_geojson,
                                res=res,
                                geo_json_conformant=flag_swap)
@@ -28,8 +33,7 @@ def fill_hexagons(geom_geojson, res, flag_swap=False, flag_return_df=False):
 
     if flag_return_df is True:
         df_fill_hex = pd.DataFrame({"hex_id": list_hexagons_filling})
-        df_fill_hex["value"] = 0
-        df_fill_hex['geometry'] = df_fill_hex.hex_id.apply(
+        df_fill_hex["geometry"] = df_fill_hex.hex_id.apply(
             lambda x:
             {"type": "Polygon",
              "coordinates": [
@@ -44,6 +48,7 @@ def fill_hexagons(geom_geojson, res, flag_swap=False, flag_return_df=False):
 
 
 def convert_to_hex_df(gdf, col):
+    """Convert a column of hexagon list to a column of hexagon"""
     hex_id = []
     for index, row in gdf.iterrows():
         hex_id.extend(row[col])
@@ -64,7 +69,7 @@ if __name__ == '__main__':
     else:
         print("Unsupported input !!!")
         exit(1)
-    resolution = 7
+    resolution = 7  # The resolution is fixed at 7 in our project
     gdf = load_and_prepare_gdf(filepath=input_dir + input_file)
     gdf["hex_fill"] = gdf["geom_swap_geojson"].apply(
         lambda x: list(fill_hexagons(geom_geojson=x,

@@ -1,3 +1,8 @@
+# This file is used to integrate json files downloaded through Google Maps API and output
+# a list of elevations corresponding to each h3 hexagon. Note: Since the order of the h3
+# hexagon list obtained by executing `gen_hex_list.py` is different each time, please make
+# sure that the h3 hexagon list imported by this file and `gen_req.py` are the same
+
 import json
 import pandas as pd
 import os
